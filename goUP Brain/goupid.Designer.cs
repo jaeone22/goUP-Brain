@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(goupid));
             this.login_panel = new System.Windows.Forms.Panel();
+            this.tos_bt = new System.Windows.Forms.Button();
             this.pw_panel = new System.Windows.Forms.Panel();
             this.pw_textBox = new System.Windows.Forms.TextBox();
             this.id_panel = new System.Windows.Forms.Panel();
@@ -58,7 +59,6 @@
             this.changepw_bt = new System.Windows.Forms.Button();
             this.logout_bt = new System.Windows.Forms.Button();
             this.idinfo_label = new System.Windows.Forms.Label();
-            this.tos_bt = new System.Windows.Forms.Button();
             this.login_panel.SuspendLayout();
             this.pw_panel.SuspendLayout();
             this.id_panel.SuspendLayout();
@@ -84,8 +84,23 @@
             this.login_panel.Location = new System.Drawing.Point(0, 40);
             this.login_panel.Name = "login_panel";
             this.login_panel.Size = new System.Drawing.Size(400, 430);
-            this.login_panel.TabIndex = 1;
+            this.login_panel.TabIndex = 0;
             this.login_panel.Visible = false;
+            // 
+            // tos_bt
+            // 
+            this.tos_bt.BackColor = System.Drawing.Color.White;
+            this.tos_bt.FlatAppearance.BorderSize = 0;
+            this.tos_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.tos_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tos_bt.ForeColor = System.Drawing.Color.Black;
+            this.tos_bt.Location = new System.Drawing.Point(20, 315);
+            this.tos_bt.Name = "tos_bt";
+            this.tos_bt.Size = new System.Drawing.Size(360, 36);
+            this.tos_bt.TabIndex = 6;
+            this.tos_bt.Text = "개인정보처리방침 보기";
+            this.tos_bt.UseVisualStyleBackColor = false;
+            this.tos_bt.Click += new System.EventHandler(this.tos_bt_Click);
             // 
             // pw_panel
             // 
@@ -94,7 +109,7 @@
             this.pw_panel.Location = new System.Drawing.Point(20, 175);
             this.pw_panel.Name = "pw_panel";
             this.pw_panel.Size = new System.Drawing.Size(360, 40);
-            this.pw_panel.TabIndex = 12;
+            this.pw_panel.TabIndex = 0;
             // 
             // pw_textBox
             // 
@@ -118,7 +133,7 @@
             this.id_panel.Location = new System.Drawing.Point(20, 95);
             this.id_panel.Name = "id_panel";
             this.id_panel.Size = new System.Drawing.Size(360, 40);
-            this.id_panel.TabIndex = 11;
+            this.id_panel.TabIndex = 0;
             // 
             // id_textBox
             // 
@@ -132,7 +147,7 @@
             this.id_textBox.Location = new System.Drawing.Point(10, 7);
             this.id_textBox.Name = "id_textBox";
             this.id_textBox.Size = new System.Drawing.Size(340, 26);
-            this.id_textBox.TabIndex = 0;
+            this.id_textBox.TabIndex = 1;
             this.id_textBox.TextChanged += new System.EventHandler(this.id_textBox_TextChanged);
             // 
             // checkBox_2
@@ -142,7 +157,7 @@
             this.checkBox_2.Location = new System.Drawing.Point(20, 256);
             this.checkBox_2.Name = "checkBox_2";
             this.checkBox_2.Size = new System.Drawing.Size(277, 25);
-            this.checkBox_2.TabIndex = 10;
+            this.checkBox_2.TabIndex = 4;
             this.checkBox_2.Text = "개인정보 수집 및 이용에 동의해요";
             this.checkBox_2.UseVisualStyleBackColor = true;
             this.checkBox_2.CheckedChanged += new System.EventHandler(this.checkBox_2_CheckedChanged);
@@ -154,7 +169,7 @@
             this.checkBox_1.Location = new System.Drawing.Point(20, 230);
             this.checkBox_1.Name = "checkBox_1";
             this.checkBox_1.Size = new System.Drawing.Size(290, 25);
-            this.checkBox_1.TabIndex = 9;
+            this.checkBox_1.TabIndex = 3;
             this.checkBox_1.Text = "goUP ID 이용약관 (ToS)에 동의해요";
             this.checkBox_1.UseVisualStyleBackColor = true;
             this.checkBox_1.CheckedChanged += new System.EventHandler(this.checkBox_1_CheckedChanged);
@@ -166,7 +181,7 @@
             this.checkBox_3.Location = new System.Drawing.Point(20, 282);
             this.checkBox_3.Name = "checkBox_3";
             this.checkBox_3.Size = new System.Drawing.Size(315, 25);
-            this.checkBox_3.TabIndex = 8;
+            this.checkBox_3.TabIndex = 5;
             this.checkBox_3.Text = "마케팅 및 광고성 정보 수신에 동의해요";
             this.checkBox_3.UseVisualStyleBackColor = true;
             this.checkBox_3.CheckedChanged += new System.EventHandler(this.checkBox_3_CheckedChanged);
@@ -178,7 +193,7 @@
             this.login_label.Location = new System.Drawing.Point(15, 15);
             this.login_label.Name = "login_label";
             this.login_label.Size = new System.Drawing.Size(190, 32);
-            this.login_label.TabIndex = 4;
+            this.login_label.TabIndex = 0;
             this.login_label.Text = "goUP ID 로그인";
             // 
             // login_bt
@@ -191,7 +206,7 @@
             this.login_bt.Location = new System.Drawing.Point(20, 360);
             this.login_bt.Name = "login_bt";
             this.login_bt.Size = new System.Drawing.Size(360, 50);
-            this.login_bt.TabIndex = 4;
+            this.login_bt.TabIndex = 7;
             this.login_bt.Text = "로그인 또는 가입";
             this.login_bt.UseVisualStyleBackColor = false;
             this.login_bt.Click += new System.EventHandler(this.login_bt_Click);
@@ -202,7 +217,7 @@
             this.pw_label.Location = new System.Drawing.Point(15, 145);
             this.pw_label.Name = "pw_label";
             this.pw_label.Size = new System.Drawing.Size(74, 21);
-            this.pw_label.TabIndex = 3;
+            this.pw_label.TabIndex = 0;
             this.pw_label.Text = "비밀번호";
             // 
             // id_label
@@ -211,7 +226,7 @@
             this.id_label.Location = new System.Drawing.Point(15, 65);
             this.id_label.Name = "id_label";
             this.id_label.Size = new System.Drawing.Size(58, 21);
-            this.id_label.TabIndex = 1;
+            this.id_label.TabIndex = 0;
             this.id_label.Text = "이메일";
             // 
             // close_bt
@@ -226,7 +241,7 @@
             this.close_bt.Location = new System.Drawing.Point(360, 0);
             this.close_bt.Name = "close_bt";
             this.close_bt.Size = new System.Drawing.Size(40, 40);
-            this.close_bt.TabIndex = 3;
+            this.close_bt.TabIndex = 0;
             this.close_bt.UseVisualStyleBackColor = false;
             this.close_bt.Click += new System.EventHandler(this.close_bt_Click);
             // 
@@ -240,7 +255,7 @@
             this.title1_panel.Location = new System.Drawing.Point(0, 0);
             this.title1_panel.Name = "title1_panel";
             this.title1_panel.Size = new System.Drawing.Size(400, 40);
-            this.title1_panel.TabIndex = 4;
+            this.title1_panel.TabIndex = 0;
             this.title1_panel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.title1_panel_MouseDown);
             this.title1_panel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.title1_panel_MouseMove);
             // 
@@ -261,7 +276,7 @@
             this.load_panel.Location = new System.Drawing.Point(0, 40);
             this.load_panel.Name = "load_panel";
             this.load_panel.Size = new System.Drawing.Size(400, 430);
-            this.load_panel.TabIndex = 5;
+            this.load_panel.TabIndex = 0;
             // 
             // idinfo_panel
             // 
@@ -277,7 +292,7 @@
             this.idinfo_panel.Location = new System.Drawing.Point(0, 40);
             this.idinfo_panel.Name = "idinfo_panel";
             this.idinfo_panel.Size = new System.Drawing.Size(400, 430);
-            this.idinfo_panel.TabIndex = 6;
+            this.idinfo_panel.TabIndex = 0;
             this.idinfo_panel.Visible = false;
             // 
             // delid_bt
@@ -289,7 +304,7 @@
             this.delid_bt.Location = new System.Drawing.Point(210, 305);
             this.delid_bt.Name = "delid_bt";
             this.delid_bt.Size = new System.Drawing.Size(170, 50);
-            this.delid_bt.TabIndex = 18;
+            this.delid_bt.TabIndex = 5;
             this.delid_bt.Text = "계정 삭제";
             this.delid_bt.UseVisualStyleBackColor = false;
             this.delid_bt.Click += new System.EventHandler(this.delid_bt_Click);
@@ -301,7 +316,7 @@
             this.oldpw_panel.Location = new System.Drawing.Point(19, 102);
             this.oldpw_panel.Name = "oldpw_panel";
             this.oldpw_panel.Size = new System.Drawing.Size(360, 40);
-            this.oldpw_panel.TabIndex = 17;
+            this.oldpw_panel.TabIndex = 0;
             // 
             // oldpw_textBox
             // 
@@ -315,7 +330,7 @@
             this.oldpw_textBox.Location = new System.Drawing.Point(10, 7);
             this.oldpw_textBox.Name = "oldpw_textBox";
             this.oldpw_textBox.Size = new System.Drawing.Size(340, 26);
-            this.oldpw_textBox.TabIndex = 2;
+            this.oldpw_textBox.TabIndex = 1;
             this.oldpw_textBox.UseSystemPasswordChar = true;
             // 
             // oldpw_label
@@ -324,7 +339,7 @@
             this.oldpw_label.Location = new System.Drawing.Point(14, 72);
             this.oldpw_label.Name = "oldpw_label";
             this.oldpw_label.Size = new System.Drawing.Size(112, 21);
-            this.oldpw_label.TabIndex = 16;
+            this.oldpw_label.TabIndex = 0;
             this.oldpw_label.Text = "기존 비밀번호";
             // 
             // newpw_panel
@@ -334,7 +349,7 @@
             this.newpw_panel.Location = new System.Drawing.Point(20, 187);
             this.newpw_panel.Name = "newpw_panel";
             this.newpw_panel.Size = new System.Drawing.Size(360, 40);
-            this.newpw_panel.TabIndex = 15;
+            this.newpw_panel.TabIndex = 0;
             // 
             // newpw_textBox
             // 
@@ -357,7 +372,7 @@
             this.newpw_label.Location = new System.Drawing.Point(15, 157);
             this.newpw_label.Name = "newpw_label";
             this.newpw_label.Size = new System.Drawing.Size(128, 21);
-            this.newpw_label.TabIndex = 14;
+            this.newpw_label.TabIndex = 0;
             this.newpw_label.Text = "새로운 비밀번호";
             // 
             // changepw_bt
@@ -370,7 +385,7 @@
             this.changepw_bt.Location = new System.Drawing.Point(20, 237);
             this.changepw_bt.Name = "changepw_bt";
             this.changepw_bt.Size = new System.Drawing.Size(360, 50);
-            this.changepw_bt.TabIndex = 13;
+            this.changepw_bt.TabIndex = 3;
             this.changepw_bt.Text = "비밀번호 변경";
             this.changepw_bt.UseVisualStyleBackColor = false;
             this.changepw_bt.Click += new System.EventHandler(this.changepw_bt_Click);
@@ -384,7 +399,7 @@
             this.logout_bt.Location = new System.Drawing.Point(20, 305);
             this.logout_bt.Name = "logout_bt";
             this.logout_bt.Size = new System.Drawing.Size(170, 50);
-            this.logout_bt.TabIndex = 13;
+            this.logout_bt.TabIndex = 4;
             this.logout_bt.Text = "로그아웃";
             this.logout_bt.UseVisualStyleBackColor = false;
             this.logout_bt.Click += new System.EventHandler(this.logout_bt_Click);
@@ -396,23 +411,8 @@
             this.idinfo_label.Location = new System.Drawing.Point(15, 15);
             this.idinfo_label.Name = "idinfo_label";
             this.idinfo_label.Size = new System.Drawing.Size(264, 32);
-            this.idinfo_label.TabIndex = 5;
+            this.idinfo_label.TabIndex = 0;
             this.idinfo_label.Text = "계정 토큰 불러오는중...";
-            // 
-            // tos_bt
-            // 
-            this.tos_bt.BackColor = System.Drawing.Color.White;
-            this.tos_bt.FlatAppearance.BorderSize = 0;
-            this.tos_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.tos_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.tos_bt.ForeColor = System.Drawing.Color.Black;
-            this.tos_bt.Location = new System.Drawing.Point(20, 315);
-            this.tos_bt.Name = "tos_bt";
-            this.tos_bt.Size = new System.Drawing.Size(360, 36);
-            this.tos_bt.TabIndex = 13;
-            this.tos_bt.Text = "개인정보처리방침 보기";
-            this.tos_bt.UseVisualStyleBackColor = false;
-            this.tos_bt.Click += new System.EventHandler(this.tos_bt_Click);
             // 
             // goupid
             // 

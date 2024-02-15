@@ -40,6 +40,7 @@ namespace goUP_Brain
             ApplyRoundCorners(id_panel, ro2);
             ApplyRoundCorners(pw_panel, ro2);
             ApplyRoundCorners(login_bt, ro1);
+            ApplyRoundCorners(tos_bt, ro1);
 
             ApplyRoundCorners(oldpw_panel, ro2);
             ApplyRoundCorners(newpw_panel, ro2);
