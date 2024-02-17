@@ -61,12 +61,23 @@
             this.goupid_del_memo = new System.Windows.Forms.Button();
             this.goupid_res_bt = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.minimode_panel = new System.Windows.Forms.Panel();
+            this.minimode_label = new System.Windows.Forms.Label();
+            this.minimode_close_bt = new System.Windows.Forms.Button();
+            this.beta_info_panel = new System.Windows.Forms.Panel();
+            this.beta_info_label = new System.Windows.Forms.Label();
+            this.beta_info_info_label = new System.Windows.Forms.Label();
+            this.beta_info_close_label = new System.Windows.Forms.Label();
+            this.beta_info_github_label = new System.Windows.Forms.Label();
+            this.show_beta_info_label = new System.Windows.Forms.Label();
             this.title1_panel.SuspendLayout();
             this.list_panel.SuspendLayout();
             this.text_panel.SuspendLayout();
             this.title2_panel.SuspendLayout();
             this.info_panel.SuspendLayout();
             this.goupid_title1_panel.SuspendLayout();
+            this.minimode_panel.SuspendLayout();
+            this.beta_info_panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // title1_panel
@@ -148,6 +159,8 @@
             // 
             // openfolder_bt
             // 
+            this.openfolder_bt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.openfolder_bt.BackColor = System.Drawing.Color.WhiteSmoke;
             this.openfolder_bt.FlatAppearance.BorderSize = 0;
             this.openfolder_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -205,6 +218,8 @@
             // 
             // mode_bt
             // 
+            this.mode_bt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.mode_bt.BackColor = System.Drawing.Color.WhiteSmoke;
             this.mode_bt.FlatAppearance.BorderSize = 0;
             this.mode_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -260,7 +275,7 @@
             this.textBox.Name = "textBox";
             this.textBox.Size = new System.Drawing.Size(530, 460);
             this.textBox.TabIndex = 7;
-            this.textBox.Text = "여기에서 시냅스를 빠르게 만들수 있어요";
+            this.textBox.Text = "여기에 메모를 입력해서 시냅스를 빠르게 만들수 있어요";
             this.textBox.TextChanged += new System.EventHandler(this.richTextBox_TextChanged);
             this.textBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.textBox_MouseDown);
             // 
@@ -292,6 +307,7 @@
             // title2_panel
             // 
             this.title2_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.title2_panel.Controls.Add(this.show_beta_info_label);
             this.title2_panel.Controls.Add(this.goupid_bt);
             this.title2_panel.Controls.Add(this.close_bt);
             this.title2_panel.Controls.Add(this.syname_label);
@@ -304,6 +320,7 @@
             // 
             // goupid_bt
             // 
+            this.goupid_bt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.goupid_bt.FlatAppearance.BorderSize = 0;
             this.goupid_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.goupid_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
@@ -319,6 +336,7 @@
             // 
             // close_bt
             // 
+            this.close_bt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.close_bt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.close_bt.FlatAppearance.BorderSize = 0;
             this.close_bt.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -421,7 +439,7 @@
             this.goupid_title1_panel.Controls.Add(this.label1);
             this.goupid_title1_panel.Location = new System.Drawing.Point(0, 0);
             this.goupid_title1_panel.Name = "goupid_title1_panel";
-            this.goupid_title1_panel.Size = new System.Drawing.Size(250, 178);
+            this.goupid_title1_panel.Size = new System.Drawing.Size(250, 40);
             this.goupid_title1_panel.TabIndex = 2;
             this.goupid_title1_panel.Visible = false;
             this.goupid_title1_panel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.title1_panel_MouseDown);
@@ -467,18 +485,132 @@
             this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.title1_panel_MouseDown);
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.title1_panel_MouseMove);
             // 
+            // minimode_panel
+            // 
+            this.minimode_panel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.minimode_panel.Controls.Add(this.minimode_close_bt);
+            this.minimode_panel.Controls.Add(this.minimode_label);
+            this.minimode_panel.Location = new System.Drawing.Point(0, 0);
+            this.minimode_panel.Name = "minimode_panel";
+            this.minimode_panel.Size = new System.Drawing.Size(250, 40);
+            this.minimode_panel.TabIndex = 5;
+            this.minimode_panel.Visible = false;
+            this.minimode_panel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.title1_panel_MouseDown);
+            this.minimode_panel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.title1_panel_MouseMove);
+            // 
+            // minimode_label
+            // 
+            this.minimode_label.AutoSize = true;
+            this.minimode_label.Location = new System.Drawing.Point(10, 10);
+            this.minimode_label.Name = "minimode_label";
+            this.minimode_label.Size = new System.Drawing.Size(92, 21);
+            this.minimode_label.TabIndex = 0;
+            this.minimode_label.Text = "goUP Brain";
+            this.minimode_label.MouseDown += new System.Windows.Forms.MouseEventHandler(this.title1_panel_MouseDown);
+            this.minimode_label.MouseMove += new System.Windows.Forms.MouseEventHandler(this.title1_panel_MouseMove);
+            // 
+            // minimode_close_bt
+            // 
+            this.minimode_close_bt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.minimode_close_bt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.minimode_close_bt.FlatAppearance.BorderSize = 0;
+            this.minimode_close_bt.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.minimode_close_bt.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
+            this.minimode_close_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.minimode_close_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.minimode_close_bt.Location = new System.Drawing.Point(210, 0);
+            this.minimode_close_bt.Name = "minimode_close_bt";
+            this.minimode_close_bt.Size = new System.Drawing.Size(40, 40);
+            this.minimode_close_bt.TabIndex = 4;
+            this.minimode_close_bt.UseVisualStyleBackColor = false;
+            this.minimode_close_bt.Click += new System.EventHandler(this.close_bt_Click);
+            // 
+            // beta_info_panel
+            // 
+            this.beta_info_panel.BackColor = System.Drawing.Color.Orange;
+            this.beta_info_panel.Controls.Add(this.beta_info_github_label);
+            this.beta_info_panel.Controls.Add(this.beta_info_close_label);
+            this.beta_info_panel.Controls.Add(this.beta_info_info_label);
+            this.beta_info_panel.Controls.Add(this.beta_info_label);
+            this.beta_info_panel.ForeColor = System.Drawing.Color.White;
+            this.beta_info_panel.Location = new System.Drawing.Point(0, 0);
+            this.beta_info_panel.Name = "beta_info_panel";
+            this.beta_info_panel.Size = new System.Drawing.Size(800, 40);
+            this.beta_info_panel.TabIndex = 10;
+            // 
+            // beta_info_label
+            // 
+            this.beta_info_label.AutoSize = true;
+            this.beta_info_label.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.beta_info_label.Location = new System.Drawing.Point(10, 10);
+            this.beta_info_label.Name = "beta_info_label";
+            this.beta_info_label.Size = new System.Drawing.Size(382, 21);
+            this.beta_info_label.TabIndex = 4;
+            this.beta_info_label.Text = "⚠️ | 이 앱은 goUP Brain 2.0의 Beta 2 버전이에요";
+            // 
+            // beta_info_info_label
+            // 
+            this.beta_info_info_label.AutoSize = true;
+            this.beta_info_info_label.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.beta_info_info_label.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.beta_info_info_label.Location = new System.Drawing.Point(660, 10);
+            this.beta_info_info_label.Name = "beta_info_info_label";
+            this.beta_info_info_label.Size = new System.Drawing.Size(80, 21);
+            this.beta_info_info_label.TabIndex = 5;
+            this.beta_info_info_label.Text = "Beta 정보";
+            this.beta_info_info_label.Click += new System.EventHandler(this.beta_info_info_label_Click);
+            // 
+            // beta_info_close_label
+            // 
+            this.beta_info_close_label.AutoSize = true;
+            this.beta_info_close_label.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.beta_info_close_label.Font = new System.Drawing.Font("맑은 고딕", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.beta_info_close_label.Location = new System.Drawing.Point(745, 10);
+            this.beta_info_close_label.Name = "beta_info_close_label";
+            this.beta_info_close_label.Size = new System.Drawing.Size(42, 21);
+            this.beta_info_close_label.TabIndex = 6;
+            this.beta_info_close_label.Text = "닫기";
+            this.beta_info_close_label.Click += new System.EventHandler(this.beta_info_close_label_Click);
+            // 
+            // beta_info_github_label
+            // 
+            this.beta_info_github_label.AutoSize = true;
+            this.beta_info_github_label.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.beta_info_github_label.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.beta_info_github_label.Location = new System.Drawing.Point(510, 10);
+            this.beta_info_github_label.Name = "beta_info_github_label";
+            this.beta_info_github_label.Size = new System.Drawing.Size(145, 21);
+            this.beta_info_github_label.TabIndex = 7;
+            this.beta_info_github_label.Text = "Github 리포지토리";
+            this.beta_info_github_label.Click += new System.EventHandler(this.beta_info_github_label_Click);
+            // 
+            // show_beta_info_label
+            // 
+            this.show_beta_info_label.AutoSize = true;
+            this.show_beta_info_label.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.show_beta_info_label.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.show_beta_info_label.ForeColor = System.Drawing.Color.Orange;
+            this.show_beta_info_label.Location = new System.Drawing.Point(10, 10);
+            this.show_beta_info_label.Name = "show_beta_info_label";
+            this.show_beta_info_label.Size = new System.Drawing.Size(211, 21);
+            this.show_beta_info_label.TabIndex = 8;
+            this.show_beta_info_label.Text = "⚠️ | goUP Brain 2.0 Beta 2";
+            this.show_beta_info_label.Click += new System.EventHandler(this.show_beta_info_label_Click);
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(800, 600);
+            this.Controls.Add(this.beta_info_panel);
+            this.Controls.Add(this.minimode_panel);
             this.Controls.Add(this.info_panel);
-            this.Controls.Add(this.goupid_title1_panel);
-            this.Controls.Add(this.title2_panel);
             this.Controls.Add(this.text_panel);
             this.Controls.Add(this.list_panel);
+            this.Controls.Add(this.goupid_title1_panel);
             this.Controls.Add(this.title1_panel);
+            this.Controls.Add(this.title2_panel);
             this.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -500,6 +632,10 @@
             this.info_panel.PerformLayout();
             this.goupid_title1_panel.ResumeLayout(false);
             this.goupid_title1_panel.PerformLayout();
+            this.minimode_panel.ResumeLayout(false);
+            this.minimode_panel.PerformLayout();
+            this.beta_info_panel.ResumeLayout(false);
+            this.beta_info_panel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -537,6 +673,15 @@
         private System.Windows.Forms.Button fastmemo_bt;
         private System.Windows.Forms.Button goupid_res_bt;
         private System.Windows.Forms.Button goupid_del_memo;
+        private System.Windows.Forms.Panel minimode_panel;
+        private System.Windows.Forms.Label minimode_label;
+        private System.Windows.Forms.Button minimode_close_bt;
+        private System.Windows.Forms.Panel beta_info_panel;
+        private System.Windows.Forms.Label beta_info_label;
+        private System.Windows.Forms.Label beta_info_close_label;
+        private System.Windows.Forms.Label beta_info_info_label;
+        private System.Windows.Forms.Label beta_info_github_label;
+        private System.Windows.Forms.Label show_beta_info_label;
     }
 }
 

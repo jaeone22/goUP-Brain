@@ -371,13 +371,50 @@ namespace goUP_Brain
                 mCurrentPosition = new Point(-e.X, -e.Y);
         }
 
+        bool minimode = false;
+
         private void title1_panel_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            /*if (e.Button == MouseButtons.Left)
             {
                 this.Location = new Point(
                 this.Location.X + (mCurrentPosition.X + e.X),
                 this.Location.Y + (mCurrentPosition.Y + e.Y));
+            }*/
+
+            int screen = Screen.PrimaryScreen.Bounds.Height;
+            int taskbarHeight = Screen.PrimaryScreen.Bounds.Height - Screen.PrimaryScreen.WorkingArea.Height;
+
+            if (e.Button == MouseButtons.Left)
+            {
+                if (this.Location.Y + (mCurrentPosition.Y + e.Y) <= screen - taskbarHeight - 80)
+                {
+                    if (minimode == true)
+                    {
+                        minimode = false;
+
+                        this.Size = new Size(800, 600);
+                        minimode_panel.Visible = false;
+                        round(sender, e);
+                    }
+
+                    this.Location = new Point(this.Location.X + (mCurrentPosition.X + e.X), this.Location.Y + (mCurrentPosition.Y + e.Y));
+                }
+                else
+                {
+                    Point two = new Point(Cursor.Position.X - 125, screen - taskbarHeight - 40);
+                    this.Location = new Point((Size)two);
+
+                    if (minimode != true)
+                    {
+                        minimode = true;
+
+                        golocal_bt_Click(sender, e);
+                        this.Size = new Size(250, 80);
+                        minimode_panel.Visible = true;
+                        round(sender, e);
+                    }
+                }
             }
         }
 
@@ -469,83 +506,93 @@ namespace goUP_Brain
 
         private async void openfolder_bt_Click(object sender, EventArgs e)
         {
-            //
-            openfolder_bt.Visible = false;
-
-            title1_panel.Visible = false;
-            goupid_title1_panel.Visible = true;
-
-            goupid_backup_close.Enabled = false;
-            goupid_backup_open.Enabled = true;
-
-            //
-            if_readmode = false;
-
-            textBox.Visible = true;
-            webBrowser.Visible = false;
-
-            textBox.ReadOnly = true;
-
-            mode_bt.Text = "goUP ID Cloud에 백업된 데이터 보는중";
-            mode_bt.Enabled = false;
-
-            listBox.SelectedItem = null;
-
-            goupid_listBox.DataSource = null;
-            goupid_listBox.Items.Clear();
-
-            //
-            // 비밀번호를 해시로 암호화
-            string hashedPassword = ComputeSha256Hash(password);
-
-            // HTTP 클라이언트 생성
-            using (HttpClient client = new HttpClient())
+            if (Properties.Settings.Default.autologin == true)
             {
-                // 전송할 데이터 생성
-                var getMemosData = new
+                //
+                openfolder_bt.Visible = false;
+
+                title1_panel.Visible = false;
+                goupid_title1_panel.Visible = true;
+
+                goupid_backup_close.Enabled = false;
+                goupid_backup_open.Enabled = true;
+
+                //
+                if_readmode = false;
+
+                textBox.Visible = true;
+                webBrowser.Visible = false;
+
+                textBox.ReadOnly = true;
+
+                mode_bt.Text = "goUP ID Cloud에 백업된 데이터 보는중";
+                mode_bt.Enabled = false;
+
+                listBox.SelectedItem = null;
+
+                goupid_listBox.DataSource = null;
+                goupid_listBox.Items.Clear();
+
+                //
+                // 비밀번호를 해시로 암호화
+                string hashedPassword = ComputeSha256Hash(password);
+
+                // HTTP 클라이언트 생성
+                using (HttpClient client = new HttpClient())
                 {
-                    username = email,
-                    password = hashedPassword // 암호화된 비밀번호 전송
-                };
-
-                // 데이터를 JSON 형식으로 변환
-                string getMemosJsonData = JsonConvert.SerializeObject(getMemosData);
-
-                // 서버 주소
-                string getMemosServerUrl = "https://port-0-goup-id-nodejs-57lz2alpnvh5jc.sel4.cloudtype.app/brain/get-title";
-
-                try
-                {
-                    // HTTP POST 요청
-                    var getMemosResponse = await client.PostAsync(getMemosServerUrl, new StringContent(getMemosJsonData, Encoding.UTF8, "application/json"));
-
-                    // 서버 응답 확인
-                    if (getMemosResponse.IsSuccessStatusCode)
+                    // 전송할 데이터 생성
+                    var getMemosData = new
                     {
-                        string memosResult = await getMemosResponse.Content.ReadAsStringAsync();
-                        // memosResult는 JSON 형식의 데이터일 것이므로 파싱 후 목록 표시
-                        var memos = JsonConvert.DeserializeObject<List<string>>(memosResult);
-                        goupid_listBox.DataSource = memos;
+                        username = email,
+                        password = hashedPassword // 암호화된 비밀번호 전송
+                    };
+
+                    // 데이터를 JSON 형식으로 변환
+                    string getMemosJsonData = JsonConvert.SerializeObject(getMemosData);
+
+                    // 서버 주소
+                    string getMemosServerUrl = "https://port-0-goup-id-nodejs-57lz2alpnvh5jc.sel4.cloudtype.app/brain/get-title";
+
+                    try
+                    {
+                        // HTTP POST 요청
+                        var getMemosResponse = await client.PostAsync(getMemosServerUrl, new StringContent(getMemosJsonData, Encoding.UTF8, "application/json"));
+
+                        // 서버 응답 확인
+                        if (getMemosResponse.IsSuccessStatusCode)
+                        {
+                            string memosResult = await getMemosResponse.Content.ReadAsStringAsync();
+                            // memosResult는 JSON 형식의 데이터일 것이므로 파싱 후 목록 표시
+                            var memos = JsonConvert.DeserializeObject<List<string>>(memosResult);
+                            goupid_listBox.DataSource = memos;
+                        }
+                        else
+                        {
+                            //알림 뛰우기
+                            info_text = "⚠️ | 서버에 문제가 있어요";
+                            info_panel.BackColor = Color.Red;
+                            infobox(sender, e);
+
+                            MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + getMemosResponse.StatusCode, "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
                         //알림 뛰우기
                         info_text = "⚠️ | 서버에 문제가 있어요";
                         info_panel.BackColor = Color.Red;
                         infobox(sender, e);
 
-                        MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + getMemosResponse.StatusCode, "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                        MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + ex, "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                     }
                 }
-                catch (Exception ex)
-                {
-                    //알림 뛰우기
-                    info_text = "⚠️ | 서버에 문제가 있어요";
-                    info_panel.BackColor = Color.Red;
-                    infobox(sender, e);
-
-                    MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + ex, "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
-                }
+            }
+            else
+            {
+                //알림 뛰우기
+                info_text = "⚠️ | goUP ID에 로그인해야 사용할수 있어요";
+                info_panel.BackColor = Color.Red;
+                infobox(sender, e);
             }
         }
 
@@ -1023,6 +1070,26 @@ namespace goUP_Brain
             }
             // 최종 결과 리턴
             return DecryptedData;
+        }
+
+        private void beta_info_github_label_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/Error-ForestofMaking/goUP-Brain");
+        }
+
+        private void beta_info_info_label_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/Error-ForestofMaking/goUP-Brain/releases/tag/Beta");
+        }
+
+        private void beta_info_close_label_Click(object sender, EventArgs e)
+        {
+            beta_info_panel.Visible = false;
+        }
+
+        private void show_beta_info_label_Click(object sender, EventArgs e)
+        {
+            beta_info_panel.Visible = true;
         }
     }
 }
