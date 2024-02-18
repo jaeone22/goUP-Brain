@@ -675,14 +675,14 @@
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.etc_panel);
-            this.Controls.Add(this.minimode_panel);
             this.Controls.Add(this.info_panel);
             this.Controls.Add(this.text_panel);
-            this.Controls.Add(this.list_panel);
             this.Controls.Add(this.goupid_title1_panel);
             this.Controls.Add(this.title1_panel);
+            this.Controls.Add(this.minimode_panel);
             this.Controls.Add(this.title2_panel);
             this.Controls.Add(this.beta_info_panel);
+            this.Controls.Add(this.list_panel);
             this.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
