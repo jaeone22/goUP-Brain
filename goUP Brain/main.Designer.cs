@@ -47,6 +47,7 @@
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.syname_label = new System.Windows.Forms.Label();
             this.title2_panel = new System.Windows.Forms.Panel();
+            this.show_beta_info_label = new System.Windows.Forms.Label();
             this.goupid_bt = new System.Windows.Forms.Button();
             this.close_bt = new System.Windows.Forms.Button();
             this.info_panel = new System.Windows.Forms.Panel();
@@ -62,14 +63,17 @@
             this.goupid_res_bt = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.minimode_panel = new System.Windows.Forms.Panel();
-            this.minimode_label = new System.Windows.Forms.Label();
             this.minimode_close_bt = new System.Windows.Forms.Button();
+            this.minimode_label = new System.Windows.Forms.Label();
             this.beta_info_panel = new System.Windows.Forms.Panel();
-            this.beta_info_label = new System.Windows.Forms.Label();
-            this.beta_info_info_label = new System.Windows.Forms.Label();
-            this.beta_info_close_label = new System.Windows.Forms.Label();
             this.beta_info_github_label = new System.Windows.Forms.Label();
-            this.show_beta_info_label = new System.Windows.Forms.Label();
+            this.beta_info_close_label = new System.Windows.Forms.Label();
+            this.beta_info_label = new System.Windows.Forms.Label();
+            this.etc_bt = new System.Windows.Forms.Button();
+            this.etc_panel = new System.Windows.Forms.Panel();
+            this.open_folder_bt = new System.Windows.Forms.Button();
+            this.open_trash_bt = new System.Windows.Forms.Button();
+            this.restore_trash_bt = new System.Windows.Forms.Button();
             this.title1_panel.SuspendLayout();
             this.list_panel.SuspendLayout();
             this.text_panel.SuspendLayout();
@@ -78,6 +82,7 @@
             this.goupid_title1_panel.SuspendLayout();
             this.minimode_panel.SuspendLayout();
             this.beta_info_panel.SuspendLayout();
+            this.etc_panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // title1_panel
@@ -191,6 +196,7 @@
             // text_panel
             // 
             this.text_panel.BackColor = System.Drawing.Color.White;
+            this.text_panel.Controls.Add(this.etc_bt);
             this.text_panel.Controls.Add(this.fastmemo_bt);
             this.text_panel.Controls.Add(this.mode_bt);
             this.text_panel.Controls.Add(this.nameedit_bt);
@@ -226,7 +232,7 @@
             this.mode_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.mode_bt.Location = new System.Drawing.Point(0, 530);
             this.mode_bt.Name = "mode_bt";
-            this.mode_bt.Size = new System.Drawing.Size(550, 30);
+            this.mode_bt.Size = new System.Drawing.Size(520, 30);
             this.mode_bt.TabIndex = 4;
             this.mode_bt.Text = "마크다운 모드로 전환하기";
             this.mode_bt.UseVisualStyleBackColor = false;
@@ -317,6 +323,19 @@
             this.title2_panel.TabIndex = 2;
             this.title2_panel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.title1_panel_MouseDown);
             this.title2_panel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.title1_panel_MouseMove);
+            // 
+            // show_beta_info_label
+            // 
+            this.show_beta_info_label.AutoSize = true;
+            this.show_beta_info_label.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.show_beta_info_label.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.show_beta_info_label.ForeColor = System.Drawing.Color.Orange;
+            this.show_beta_info_label.Location = new System.Drawing.Point(10, 10);
+            this.show_beta_info_label.Name = "show_beta_info_label";
+            this.show_beta_info_label.Size = new System.Drawing.Size(80, 21);
+            this.show_beta_info_label.TabIndex = 8;
+            this.show_beta_info_label.Text = "⚠️ | Beta";
+            this.show_beta_info_label.Click += new System.EventHandler(this.show_beta_info_label_Click);
             // 
             // goupid_bt
             // 
@@ -498,17 +517,6 @@
             this.minimode_panel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.title1_panel_MouseDown);
             this.minimode_panel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.title1_panel_MouseMove);
             // 
-            // minimode_label
-            // 
-            this.minimode_label.AutoSize = true;
-            this.minimode_label.Location = new System.Drawing.Point(10, 10);
-            this.minimode_label.Name = "minimode_label";
-            this.minimode_label.Size = new System.Drawing.Size(92, 21);
-            this.minimode_label.TabIndex = 0;
-            this.minimode_label.Text = "goUP Brain";
-            this.minimode_label.MouseDown += new System.Windows.Forms.MouseEventHandler(this.title1_panel_MouseDown);
-            this.minimode_label.MouseMove += new System.Windows.Forms.MouseEventHandler(this.title1_panel_MouseMove);
-            // 
             // minimode_close_bt
             // 
             this.minimode_close_bt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -525,12 +533,22 @@
             this.minimode_close_bt.UseVisualStyleBackColor = false;
             this.minimode_close_bt.Click += new System.EventHandler(this.close_bt_Click);
             // 
+            // minimode_label
+            // 
+            this.minimode_label.AutoSize = true;
+            this.minimode_label.Location = new System.Drawing.Point(10, 10);
+            this.minimode_label.Name = "minimode_label";
+            this.minimode_label.Size = new System.Drawing.Size(92, 21);
+            this.minimode_label.TabIndex = 0;
+            this.minimode_label.Text = "goUP Brain";
+            this.minimode_label.MouseDown += new System.Windows.Forms.MouseEventHandler(this.title1_panel_MouseDown);
+            this.minimode_label.MouseMove += new System.Windows.Forms.MouseEventHandler(this.title1_panel_MouseMove);
+            // 
             // beta_info_panel
             // 
             this.beta_info_panel.BackColor = System.Drawing.Color.Orange;
             this.beta_info_panel.Controls.Add(this.beta_info_github_label);
             this.beta_info_panel.Controls.Add(this.beta_info_close_label);
-            this.beta_info_panel.Controls.Add(this.beta_info_info_label);
             this.beta_info_panel.Controls.Add(this.beta_info_label);
             this.beta_info_panel.ForeColor = System.Drawing.Color.White;
             this.beta_info_panel.Location = new System.Drawing.Point(0, 0);
@@ -538,27 +556,17 @@
             this.beta_info_panel.Size = new System.Drawing.Size(800, 40);
             this.beta_info_panel.TabIndex = 10;
             // 
-            // beta_info_label
+            // beta_info_github_label
             // 
-            this.beta_info_label.AutoSize = true;
-            this.beta_info_label.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.beta_info_label.Location = new System.Drawing.Point(10, 10);
-            this.beta_info_label.Name = "beta_info_label";
-            this.beta_info_label.Size = new System.Drawing.Size(382, 21);
-            this.beta_info_label.TabIndex = 4;
-            this.beta_info_label.Text = "⚠️ | 이 앱은 goUP Brain 2.0의 Beta 2 버전이에요";
-            // 
-            // beta_info_info_label
-            // 
-            this.beta_info_info_label.AutoSize = true;
-            this.beta_info_info_label.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.beta_info_info_label.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.beta_info_info_label.Location = new System.Drawing.Point(660, 10);
-            this.beta_info_info_label.Name = "beta_info_info_label";
-            this.beta_info_info_label.Size = new System.Drawing.Size(80, 21);
-            this.beta_info_info_label.TabIndex = 5;
-            this.beta_info_info_label.Text = "Beta 정보";
-            this.beta_info_info_label.Click += new System.EventHandler(this.beta_info_info_label_Click);
+            this.beta_info_github_label.AutoSize = true;
+            this.beta_info_github_label.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.beta_info_github_label.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.beta_info_github_label.Location = new System.Drawing.Point(595, 10);
+            this.beta_info_github_label.Name = "beta_info_github_label";
+            this.beta_info_github_label.Size = new System.Drawing.Size(145, 21);
+            this.beta_info_github_label.TabIndex = 7;
+            this.beta_info_github_label.Text = "Github 리포지토리";
+            this.beta_info_github_label.Click += new System.EventHandler(this.beta_info_github_label_Click);
             // 
             // beta_info_close_label
             // 
@@ -572,30 +580,91 @@
             this.beta_info_close_label.Text = "닫기";
             this.beta_info_close_label.Click += new System.EventHandler(this.beta_info_close_label_Click);
             // 
-            // beta_info_github_label
+            // beta_info_label
             // 
-            this.beta_info_github_label.AutoSize = true;
-            this.beta_info_github_label.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.beta_info_github_label.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.beta_info_github_label.Location = new System.Drawing.Point(510, 10);
-            this.beta_info_github_label.Name = "beta_info_github_label";
-            this.beta_info_github_label.Size = new System.Drawing.Size(145, 21);
-            this.beta_info_github_label.TabIndex = 7;
-            this.beta_info_github_label.Text = "Github 리포지토리";
-            this.beta_info_github_label.Click += new System.EventHandler(this.beta_info_github_label_Click);
+            this.beta_info_label.AutoSize = true;
+            this.beta_info_label.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.beta_info_label.Location = new System.Drawing.Point(10, 10);
+            this.beta_info_label.Name = "beta_info_label";
+            this.beta_info_label.Size = new System.Drawing.Size(382, 21);
+            this.beta_info_label.TabIndex = 4;
+            this.beta_info_label.Text = "⚠️ | 이 앱은 goUP Brain 2.0의 Beta 3 버전이에요";
             // 
-            // show_beta_info_label
+            // etc_bt
             // 
-            this.show_beta_info_label.AutoSize = true;
-            this.show_beta_info_label.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.show_beta_info_label.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.show_beta_info_label.ForeColor = System.Drawing.Color.Orange;
-            this.show_beta_info_label.Location = new System.Drawing.Point(10, 10);
-            this.show_beta_info_label.Name = "show_beta_info_label";
-            this.show_beta_info_label.Size = new System.Drawing.Size(211, 21);
-            this.show_beta_info_label.TabIndex = 8;
-            this.show_beta_info_label.Text = "⚠️ | goUP Brain 2.0 Beta 2";
-            this.show_beta_info_label.Click += new System.EventHandler(this.show_beta_info_label_Click);
+            this.etc_bt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.etc_bt.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.etc_bt.FlatAppearance.BorderSize = 0;
+            this.etc_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.etc_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.etc_bt.Location = new System.Drawing.Point(520, 530);
+            this.etc_bt.Name = "etc_bt";
+            this.etc_bt.Size = new System.Drawing.Size(30, 30);
+            this.etc_bt.TabIndex = 10;
+            this.etc_bt.Text = "▲";
+            this.etc_bt.UseVisualStyleBackColor = false;
+            this.etc_bt.Click += new System.EventHandler(this.etc_bt_Click);
+            // 
+            // etc_panel
+            // 
+            this.etc_panel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.etc_panel.Controls.Add(this.restore_trash_bt);
+            this.etc_panel.Controls.Add(this.open_trash_bt);
+            this.etc_panel.Controls.Add(this.open_folder_bt);
+            this.etc_panel.Location = new System.Drawing.Point(650, 480);
+            this.etc_panel.Name = "etc_panel";
+            this.etc_panel.Size = new System.Drawing.Size(150, 90);
+            this.etc_panel.TabIndex = 11;
+            this.etc_panel.Visible = false;
+            // 
+            // open_folder_bt
+            // 
+            this.open_folder_bt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.open_folder_bt.FlatAppearance.BorderSize = 0;
+            this.open_folder_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.open_folder_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.open_folder_bt.Location = new System.Drawing.Point(0, 0);
+            this.open_folder_bt.Name = "open_folder_bt";
+            this.open_folder_bt.Size = new System.Drawing.Size(150, 30);
+            this.open_folder_bt.TabIndex = 4;
+            this.open_folder_bt.Text = "📂 폴더 열기";
+            this.open_folder_bt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.open_folder_bt.UseVisualStyleBackColor = false;
+            this.open_folder_bt.Click += new System.EventHandler(this.open_folder_bt_Click);
+            // 
+            // open_trash_bt
+            // 
+            this.open_trash_bt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.open_trash_bt.FlatAppearance.BorderSize = 0;
+            this.open_trash_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.open_trash_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.open_trash_bt.Location = new System.Drawing.Point(0, 30);
+            this.open_trash_bt.Name = "open_trash_bt";
+            this.open_trash_bt.Size = new System.Drawing.Size(150, 30);
+            this.open_trash_bt.TabIndex = 5;
+            this.open_trash_bt.Text = "🗑️ 휴지통 열기";
+            this.open_trash_bt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.open_trash_bt.UseVisualStyleBackColor = false;
+            this.open_trash_bt.Click += new System.EventHandler(this.open_trash_bt_Click);
+            // 
+            // restore_trash_bt
+            // 
+            this.restore_trash_bt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.restore_trash_bt.FlatAppearance.BorderSize = 0;
+            this.restore_trash_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.restore_trash_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.restore_trash_bt.Location = new System.Drawing.Point(0, 60);
+            this.restore_trash_bt.Name = "restore_trash_bt";
+            this.restore_trash_bt.Size = new System.Drawing.Size(150, 30);
+            this.restore_trash_bt.TabIndex = 6;
+            this.restore_trash_bt.Text = "🗑️ 시냅스 복원";
+            this.restore_trash_bt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.restore_trash_bt.UseVisualStyleBackColor = false;
+            this.restore_trash_bt.Click += new System.EventHandler(this.restore_trash_bt_Click);
             // 
             // main
             // 
@@ -603,6 +672,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(800, 600);
+            this.Controls.Add(this.etc_panel);
             this.Controls.Add(this.beta_info_panel);
             this.Controls.Add(this.minimode_panel);
             this.Controls.Add(this.info_panel);
@@ -636,6 +706,7 @@
             this.minimode_panel.PerformLayout();
             this.beta_info_panel.ResumeLayout(false);
             this.beta_info_panel.PerformLayout();
+            this.etc_panel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -679,9 +750,13 @@
         private System.Windows.Forms.Panel beta_info_panel;
         private System.Windows.Forms.Label beta_info_label;
         private System.Windows.Forms.Label beta_info_close_label;
-        private System.Windows.Forms.Label beta_info_info_label;
         private System.Windows.Forms.Label beta_info_github_label;
         private System.Windows.Forms.Label show_beta_info_label;
+        private System.Windows.Forms.Button etc_bt;
+        private System.Windows.Forms.Panel etc_panel;
+        private System.Windows.Forms.Button restore_trash_bt;
+        private System.Windows.Forms.Button open_trash_bt;
+        private System.Windows.Forms.Button open_folder_bt;
     }
 }
 

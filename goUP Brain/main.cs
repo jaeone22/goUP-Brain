@@ -1077,11 +1077,6 @@ namespace goUP_Brain
             Process.Start("https://github.com/Error-ForestofMaking/goUP-Brain");
         }
 
-        private void beta_info_info_label_Click(object sender, EventArgs e)
-        {
-            Process.Start("https://github.com/Error-ForestofMaking/goUP-Brain/releases/tag/Beta");
-        }
-
         private void beta_info_close_label_Click(object sender, EventArgs e)
         {
             beta_info_panel.Visible = false;
@@ -1090,6 +1085,95 @@ namespace goUP_Brain
         private void show_beta_info_label_Click(object sender, EventArgs e)
         {
             beta_info_panel.Visible = true;
+        }
+
+        bool etc_menu_isopen = false;
+
+        private void etc_bt_Click(object sender, EventArgs e)
+        {
+            if (etc_menu_isopen != true)
+            {
+                //열기
+                etc_menu_isopen = true;
+
+                etc_panel.Visible = true;
+
+                etc_bt.Text = "▼";
+                etc_bt.BackColor = Color.DodgerBlue;
+                etc_bt.ForeColor = Color.White;
+            }
+            else
+            {
+                //닫기
+                etc_menu_isopen = false;
+
+                etc_panel.Visible = false;
+
+                etc_bt.Text = "▲";
+                etc_bt.BackColor = Color.WhiteSmoke;
+                etc_bt.ForeColor = Color.Black;
+            }
+        }
+
+        private void open_folder_bt_Click(object sender, EventArgs e)
+        {
+            etc_bt_Click(sender, e);
+
+            Process.Start(@"C:\goUP\Brain");
+        }
+
+        private void open_trash_bt_Click(object sender, EventArgs e)
+        {
+            etc_bt_Click(sender, e);
+
+            Process.Start(@"C:\goUP\Brain\.Trash");
+        }
+
+        private void restore_trash_bt_Click(object sender, EventArgs e)
+        {
+            etc_bt_Click(sender, e);
+
+            if (MessageBox.Show("휴지통에 있는 모든 시냅스를 복원할까요?", "goUP Brain", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                try
+                {
+                    // 폴더 A의 모든 파일 가져오기
+                    string[] files = Directory.GetFiles(@"C:\goUP\Brain\.Trash");
+
+                    // 각 파일을 폴더 B로 이동하고 파일 이름에 "복원:" 추가
+                    foreach (string file in files)
+                    {
+                        // 파일 이름에서 파일명 추출
+                        string fileName = Path.GetFileName(file);
+
+                        // 파일을 폴더 B로 이동하고 이름에 "복원:" 추가
+                        string newFilePath = Path.Combine(@"C:\goUP\Brain", "!! " + fileName);
+                        File.Move(file, newFilePath);
+
+                        //알림 뛰우기
+                        info_text = fileName + " 시냅스를 복원했어요";
+                        info_panel.BackColor = Color.DodgerBlue;
+                        infobox(sender, e);
+                    }
+
+                    reload(sender, e);
+
+                    //알림 뛰우기
+                    info_text = "시냅스를 모두 복원했어요";
+                    info_panel.BackColor = Color.DodgerBlue;
+                    infobox(sender, e);
+                }
+                catch (Exception ex)
+                {
+                    //알림 뛰우기
+                    info_text = "⚠️ | 시냅스를 복원할수 없어요";
+                    info_panel.BackColor = Color.Red;
+                    infobox(sender, e);
+
+                    MessageBox.Show("goUP Brain 앱에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + ex.Message,
+                        "goUP Brain", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                }
+            }
         }
     }
 }
