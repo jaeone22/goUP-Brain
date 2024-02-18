@@ -39,6 +39,7 @@
             this.openfolder_bt = new System.Windows.Forms.Button();
             this.listBox = new System.Windows.Forms.ListBox();
             this.text_panel = new System.Windows.Forms.Panel();
+            this.etc_bt = new System.Windows.Forms.Button();
             this.fastmemo_bt = new System.Windows.Forms.Button();
             this.mode_bt = new System.Windows.Forms.Button();
             this.nameedit_bt = new System.Windows.Forms.Button();
@@ -69,11 +70,10 @@
             this.beta_info_github_label = new System.Windows.Forms.Label();
             this.beta_info_close_label = new System.Windows.Forms.Label();
             this.beta_info_label = new System.Windows.Forms.Label();
-            this.etc_bt = new System.Windows.Forms.Button();
             this.etc_panel = new System.Windows.Forms.Panel();
-            this.open_folder_bt = new System.Windows.Forms.Button();
-            this.open_trash_bt = new System.Windows.Forms.Button();
             this.restore_trash_bt = new System.Windows.Forms.Button();
+            this.open_trash_bt = new System.Windows.Forms.Button();
+            this.open_folder_bt = new System.Windows.Forms.Button();
             this.title1_panel.SuspendLayout();
             this.list_panel.SuspendLayout();
             this.text_panel.SuspendLayout();
@@ -208,6 +208,22 @@
             this.text_panel.Size = new System.Drawing.Size(550, 560);
             this.text_panel.TabIndex = 3;
             // 
+            // etc_bt
+            // 
+            this.etc_bt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.etc_bt.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.etc_bt.FlatAppearance.BorderSize = 0;
+            this.etc_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.etc_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.etc_bt.Location = new System.Drawing.Point(520, 530);
+            this.etc_bt.Name = "etc_bt";
+            this.etc_bt.Size = new System.Drawing.Size(30, 30);
+            this.etc_bt.TabIndex = 10;
+            this.etc_bt.Text = "▲";
+            this.etc_bt.UseVisualStyleBackColor = false;
+            this.etc_bt.Click += new System.EventHandler(this.etc_bt_Click);
+            // 
             // fastmemo_bt
             // 
             this.fastmemo_bt.FlatAppearance.BorderSize = 0;
@@ -335,6 +351,7 @@
             this.show_beta_info_label.Size = new System.Drawing.Size(80, 21);
             this.show_beta_info_label.TabIndex = 8;
             this.show_beta_info_label.Text = "⚠️ | Beta";
+            this.show_beta_info_label.Visible = false;
             this.show_beta_info_label.Click += new System.EventHandler(this.show_beta_info_label_Click);
             // 
             // goupid_bt
@@ -555,6 +572,7 @@
             this.beta_info_panel.Name = "beta_info_panel";
             this.beta_info_panel.Size = new System.Drawing.Size(800, 40);
             this.beta_info_panel.TabIndex = 10;
+            this.beta_info_panel.Visible = false;
             // 
             // beta_info_github_label
             // 
@@ -590,22 +608,6 @@
             this.beta_info_label.TabIndex = 4;
             this.beta_info_label.Text = "⚠️ | 이 앱은 goUP Brain 2.0의 Beta 3 버전이에요";
             // 
-            // etc_bt
-            // 
-            this.etc_bt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.etc_bt.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.etc_bt.FlatAppearance.BorderSize = 0;
-            this.etc_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.etc_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.etc_bt.Location = new System.Drawing.Point(520, 530);
-            this.etc_bt.Name = "etc_bt";
-            this.etc_bt.Size = new System.Drawing.Size(30, 30);
-            this.etc_bt.TabIndex = 10;
-            this.etc_bt.Text = "▲";
-            this.etc_bt.UseVisualStyleBackColor = false;
-            this.etc_bt.Click += new System.EventHandler(this.etc_bt_Click);
-            // 
             // etc_panel
             // 
             this.etc_panel.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -617,38 +619,6 @@
             this.etc_panel.Size = new System.Drawing.Size(150, 90);
             this.etc_panel.TabIndex = 11;
             this.etc_panel.Visible = false;
-            // 
-            // open_folder_bt
-            // 
-            this.open_folder_bt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.open_folder_bt.FlatAppearance.BorderSize = 0;
-            this.open_folder_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.open_folder_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.open_folder_bt.Location = new System.Drawing.Point(0, 0);
-            this.open_folder_bt.Name = "open_folder_bt";
-            this.open_folder_bt.Size = new System.Drawing.Size(150, 30);
-            this.open_folder_bt.TabIndex = 4;
-            this.open_folder_bt.Text = "📂 폴더 열기";
-            this.open_folder_bt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.open_folder_bt.UseVisualStyleBackColor = false;
-            this.open_folder_bt.Click += new System.EventHandler(this.open_folder_bt_Click);
-            // 
-            // open_trash_bt
-            // 
-            this.open_trash_bt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.open_trash_bt.FlatAppearance.BorderSize = 0;
-            this.open_trash_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.open_trash_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.open_trash_bt.Location = new System.Drawing.Point(0, 30);
-            this.open_trash_bt.Name = "open_trash_bt";
-            this.open_trash_bt.Size = new System.Drawing.Size(150, 30);
-            this.open_trash_bt.TabIndex = 5;
-            this.open_trash_bt.Text = "🗑️ 휴지통 열기";
-            this.open_trash_bt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.open_trash_bt.UseVisualStyleBackColor = false;
-            this.open_trash_bt.Click += new System.EventHandler(this.open_trash_bt_Click);
             // 
             // restore_trash_bt
             // 
@@ -666,6 +636,38 @@
             this.restore_trash_bt.UseVisualStyleBackColor = false;
             this.restore_trash_bt.Click += new System.EventHandler(this.restore_trash_bt_Click);
             // 
+            // open_trash_bt
+            // 
+            this.open_trash_bt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.open_trash_bt.FlatAppearance.BorderSize = 0;
+            this.open_trash_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.open_trash_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.open_trash_bt.Location = new System.Drawing.Point(0, 30);
+            this.open_trash_bt.Name = "open_trash_bt";
+            this.open_trash_bt.Size = new System.Drawing.Size(150, 30);
+            this.open_trash_bt.TabIndex = 5;
+            this.open_trash_bt.Text = "🗑️ 휴지통 열기";
+            this.open_trash_bt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.open_trash_bt.UseVisualStyleBackColor = false;
+            this.open_trash_bt.Click += new System.EventHandler(this.open_trash_bt_Click);
+            // 
+            // open_folder_bt
+            // 
+            this.open_folder_bt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.open_folder_bt.FlatAppearance.BorderSize = 0;
+            this.open_folder_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.open_folder_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.open_folder_bt.Location = new System.Drawing.Point(0, 0);
+            this.open_folder_bt.Name = "open_folder_bt";
+            this.open_folder_bt.Size = new System.Drawing.Size(150, 30);
+            this.open_folder_bt.TabIndex = 4;
+            this.open_folder_bt.Text = "📂 폴더 열기";
+            this.open_folder_bt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.open_folder_bt.UseVisualStyleBackColor = false;
+            this.open_folder_bt.Click += new System.EventHandler(this.open_folder_bt_Click);
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -673,7 +675,6 @@
             this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.etc_panel);
-            this.Controls.Add(this.beta_info_panel);
             this.Controls.Add(this.minimode_panel);
             this.Controls.Add(this.info_panel);
             this.Controls.Add(this.text_panel);
@@ -681,6 +682,7 @@
             this.Controls.Add(this.goupid_title1_panel);
             this.Controls.Add(this.title1_panel);
             this.Controls.Add(this.title2_panel);
+            this.Controls.Add(this.beta_info_panel);
             this.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
