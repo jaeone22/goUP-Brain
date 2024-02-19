@@ -1175,5 +1175,13 @@ namespace goUP_Brain
                 }
             }
         }
+
+        private void open_settings_bt_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            settings f = new settings();
+            f.ShowDialog();
+            this.Show();
+        }
     }
 }
