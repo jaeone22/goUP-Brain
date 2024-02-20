@@ -34,6 +34,15 @@ namespace goUP_Brain
             //라운드 처리
             round(sender, e);
 
+            //버전
+            beta_info_label.Text = "⚠️ | goUP Brain " + Properties.app.Default.version;
+
+            //베타
+            if (Properties.app.Default.is_beta == true)
+            {
+                beta_info_panel.Visible = true;
+            }
+
             //디렉토리 생성
             DirectoryInfo di = Directory.CreateDirectory(@"C:\goUP");
             di = Directory.CreateDirectory(@"C:\goUP\Brain");
@@ -706,15 +715,21 @@ namespace goUP_Brain
                             // 서버 응답 확인
                             if (getMemoContentResponse.IsSuccessStatusCode)
                             {
+                                string onebone = await getMemoContentResponse.Content.ReadAsStringAsync();
                                 string memoContentResult = await getMemoContentResponse.Content.ReadAsStringAsync();
                                 memoContentResult = DecryptString(memoContentResult, password);
 
                                 if (memoContentResult == "error")
                                 {
+                                    title_textBox.Text = "암호화된 시냅스";
+                                    textBox.Text = onebone;
+
                                     //알림 뛰우기
                                     info_text = "⚠️ | 시냅스를 복호화할수 없어요";
                                     info_panel.BackColor = Color.Red;
                                     infobox(sender, e);
+
+                                    MessageBox.Show("시냅스를 복구할수 없어요\r\n대신 암호화된 내용을 로드했어요\r\n설정 ❯ 시냅스 복구에서 시냅스를 복구해주세요", "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                                 }
                                 else
                                 {
@@ -792,15 +807,34 @@ namespace goUP_Brain
                         // 서버 응답 확인
                         if (getMemoContentResponse.IsSuccessStatusCode)
                         {
+                            string onebone = await getMemoContentResponse.Content.ReadAsStringAsync();
                             string memoContentResult = await getMemoContentResponse.Content.ReadAsStringAsync();
                             memoContentResult = DecryptString(memoContentResult, password);
 
                             if (memoContentResult == "error")
                             {
+                                int count = 1;
+
+                                while (System.IO.File.Exists(df + "암호화된 시냅스 " + count + ".goUP"))
+                                {
+                                    count++;
+                                }
+
+                                StreamWriter writer;
+                                writer = File.CreateText(df + "암호화된 시냅스 " + count + ".goUP");
+                                writer.Close();
+
+                                File.WriteAllText(df + "암호화된 시냅스 " + count + ".goUP", onebone);
+
+                                //새로고침
+                                reload(sender, e);
+
                                 //알림 뛰우기
                                 info_text = "⚠️ | 시냅스를 복호화할수 없어요";
                                 info_panel.BackColor = Color.Red;
                                 infobox(sender, e);
+
+                                MessageBox.Show("시냅스를 복구할수 없어요\r\n대신 암호화된 내용을 저장했어요\r\n설정 ❯ 시냅스 복구에서 시냅스를 복구해주세요", "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                             }
                             else
                             {
@@ -859,7 +893,7 @@ namespace goUP_Brain
                 if (memoContent == "error")
                 {
                     //알림 뛰우기
-                    info_text = "⚠️ | 시냅스를 암호화할수 없어요";
+                    info_text = "⚠️ | 시냅스를 암호화할수 없어요. 백업하지 못했어요";
                     info_panel.BackColor = Color.Red;
                     infobox(sender, e);
                 }
@@ -1178,9 +1212,12 @@ namespace goUP_Brain
 
         private void open_settings_bt_Click(object sender, EventArgs e)
         {
+            etc_bt_Click(sender, e);
+
             this.Hide();
             settings f = new settings();
             f.ShowDialog();
+            reload(sender, e);
             this.Show();
         }
     }

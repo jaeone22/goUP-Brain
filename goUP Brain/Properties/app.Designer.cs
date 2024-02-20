@@ -13,11 +13,11 @@ namespace goUP_Brain.Properties {
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.9.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    internal sealed partial class app : global::System.Configuration.ApplicationSettingsBase {
         
-        private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
+        private static app defaultInstance = ((app)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new app())));
         
-        public static Settings Default {
+        public static app Default {
             get {
                 return defaultInstance;
             }
@@ -25,49 +25,37 @@ namespace goUP_Brain.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string id {
+        [global::System.Configuration.DefaultSettingValueAttribute("2.1 Beta 1")]
+        public string version {
             get {
-                return ((string)(this["id"]));
+                return ((string)(this["version"]));
             }
             set {
-                this["id"] = value;
+                this["version"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string pw {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool is_beta {
             get {
-                return ((string)(this["pw"]));
+                return ((bool)(this["is_beta"]));
             }
             set {
-                this["pw"] = value;
+                this["is_beta"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool autologin {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool is_goupstore {
             get {
-                return ((bool)(this["autologin"]));
+                return ((bool)(this["is_goupstore"]));
             }
             set {
-                this["autologin"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool please_stop_hacking {
-            get {
-                return ((bool)(this["please_stop_hacking"]));
-            }
-            set {
-                this["please_stop_hacking"] = value;
+                this["is_goupstore"] = value;
             }
         }
     }
