@@ -45,6 +45,8 @@
             this.title_info_menu_panel = new System.Windows.Forms.Label();
             this.pictureBox_info_menu_panel = new System.Windows.Forms.PictureBox();
             this.info_menu_panel = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.ls_label_1 = new System.Windows.Forms.Label();
             this.ls_dotnet_link = new System.Windows.Forms.LinkLabel();
             this.ls_dotnet_title = new System.Windows.Forms.Label();
             this.ls_dotnet_label = new System.Windows.Forms.Label();
@@ -54,7 +56,6 @@
             this.ls_markdig_link = new System.Windows.Forms.LinkLabel();
             this.ls_markdig_title = new System.Windows.Forms.Label();
             this.ls_markdig_label = new System.Windows.Forms.Label();
-            this.ls_label_1 = new System.Windows.Forms.Label();
             this.ver_info_menu_panel = new System.Windows.Forms.Label();
             this.editdata_menu_panel = new System.Windows.Forms.Panel();
             this.restore_editdata_menu_panel = new System.Windows.Forms.Button();
@@ -73,7 +74,6 @@
             this.label_restore_menu_panel = new System.Windows.Forms.Label();
             this.pictureBox_restore_menu_panel = new System.Windows.Forms.PictureBox();
             this.title_restore_menu_panel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.title_panel.SuspendLayout();
             this.sidebar_panel.SuspendLayout();
             this.thanks_panel.SuspendLayout();
@@ -172,7 +172,8 @@
             this.thanks_richTextBox.ForeColor = System.Drawing.Color.Black;
             this.thanks_richTextBox.Location = new System.Drawing.Point(15, 50);
             this.thanks_richTextBox.Name = "thanks_richTextBox";
-            this.thanks_richTextBox.Size = new System.Drawing.Size(220, 250);
+            this.thanks_richTextBox.ReadOnly = true;
+            this.thanks_richTextBox.Size = new System.Drawing.Size(200, 255);
             this.thanks_richTextBox.TabIndex = 4;
             this.thanks_richTextBox.Text = "목록 가져오는중...";
             // 
@@ -196,9 +197,9 @@
             this.restore_menu_open_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.restore_menu_open_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.restore_menu_open_bt.ForeColor = System.Drawing.Color.Black;
-            this.restore_menu_open_bt.Location = new System.Drawing.Point(0, 30);
+            this.restore_menu_open_bt.Location = new System.Drawing.Point(10, 60);
             this.restore_menu_open_bt.Name = "restore_menu_open_bt";
-            this.restore_menu_open_bt.Size = new System.Drawing.Size(250, 30);
+            this.restore_menu_open_bt.Size = new System.Drawing.Size(230, 40);
             this.restore_menu_open_bt.TabIndex = 13;
             this.restore_menu_open_bt.Text = " 🛠️ 시냅스 복구";
             this.restore_menu_open_bt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -213,9 +214,9 @@
             this.editdata_menu_open_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editdata_menu_open_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.editdata_menu_open_bt.ForeColor = System.Drawing.Color.White;
-            this.editdata_menu_open_bt.Location = new System.Drawing.Point(0, 0);
+            this.editdata_menu_open_bt.Location = new System.Drawing.Point(10, 10);
             this.editdata_menu_open_bt.Name = "editdata_menu_open_bt";
-            this.editdata_menu_open_bt.Size = new System.Drawing.Size(250, 30);
+            this.editdata_menu_open_bt.Size = new System.Drawing.Size(230, 40);
             this.editdata_menu_open_bt.TabIndex = 12;
             this.editdata_menu_open_bt.Text = " 📂 데이터 관리";
             this.editdata_menu_open_bt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -228,9 +229,9 @@
             this.thanks_panel.Controls.Add(this.thanks_add_bt);
             this.thanks_panel.Controls.Add(this.thanks_title);
             this.thanks_panel.Controls.Add(this.thanks_richTextBox);
-            this.thanks_panel.Location = new System.Drawing.Point(0, 245);
+            this.thanks_panel.Location = new System.Drawing.Point(10, 230);
             this.thanks_panel.Name = "thanks_panel";
-            this.thanks_panel.Size = new System.Drawing.Size(250, 345);
+            this.thanks_panel.Size = new System.Drawing.Size(230, 320);
             this.thanks_panel.TabIndex = 10;
             // 
             // thanks_add_bt
@@ -240,7 +241,7 @@
             this.thanks_add_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.thanks_add_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.thanks_add_bt.ForeColor = System.Drawing.Color.Black;
-            this.thanks_add_bt.Location = new System.Drawing.Point(208, 10);
+            this.thanks_add_bt.Location = new System.Drawing.Point(188, 10);
             this.thanks_add_bt.Name = "thanks_add_bt";
             this.thanks_add_bt.Size = new System.Drawing.Size(32, 32);
             this.thanks_add_bt.TabIndex = 10;
@@ -266,9 +267,9 @@
             this.info_menu_open_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.info_menu_open_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.info_menu_open_bt.ForeColor = System.Drawing.Color.Black;
-            this.info_menu_open_bt.Location = new System.Drawing.Point(0, 60);
+            this.info_menu_open_bt.Location = new System.Drawing.Point(10, 110);
             this.info_menu_open_bt.Name = "info_menu_open_bt";
-            this.info_menu_open_bt.Size = new System.Drawing.Size(250, 30);
+            this.info_menu_open_bt.Size = new System.Drawing.Size(230, 40);
             this.info_menu_open_bt.TabIndex = 4;
             this.info_menu_open_bt.Text = " ℹ️ 앱 정보";
             this.info_menu_open_bt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -316,6 +317,26 @@
             this.info_menu_panel.Size = new System.Drawing.Size(550, 560);
             this.info_menu_panel.TabIndex = 8;
             this.info_menu_panel.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.Location = new System.Drawing.Point(190, 200);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(232, 32);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "- 오픈소스 라이선스";
+            // 
+            // ls_label_1
+            // 
+            this.ls_label_1.AutoSize = true;
+            this.ls_label_1.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.ls_label_1.Location = new System.Drawing.Point(80, 200);
+            this.ls_label_1.Name = "ls_label_1";
+            this.ls_label_1.Size = new System.Drawing.Size(118, 32);
+            this.ls_label_1.TabIndex = 10;
+            this.ls_label_1.Text = "법적 고지";
             // 
             // ls_dotnet_link
             // 
@@ -418,16 +439,6 @@
             this.ls_markdig_label.Size = new System.Drawing.Size(294, 40);
             this.ls_markdig_label.TabIndex = 11;
             this.ls_markdig_label.Text = "Copyright (c) 2018-2019, Alexandre Mutel\r\nAll rights reserved.";
-            // 
-            // ls_label_1
-            // 
-            this.ls_label_1.AutoSize = true;
-            this.ls_label_1.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.ls_label_1.Location = new System.Drawing.Point(80, 200);
-            this.ls_label_1.Name = "ls_label_1";
-            this.ls_label_1.Size = new System.Drawing.Size(118, 32);
-            this.ls_label_1.TabIndex = 10;
-            this.ls_label_1.Text = "법적 고지";
             // 
             // ver_info_menu_panel
             // 
@@ -651,16 +662,6 @@
             this.title_restore_menu_panel.Size = new System.Drawing.Size(172, 40);
             this.title_restore_menu_panel.TabIndex = 6;
             this.title_restore_menu_panel.Text = "시냅스 복구";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("맑은 고딕", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.Location = new System.Drawing.Point(190, 200);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(232, 32);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "- 오픈소스 라이선스";
             // 
             // settings
             // 

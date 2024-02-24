@@ -41,20 +41,25 @@ namespace goUP_Brain
         {
             //라운드 처리
             int ro1 = 50;
-            int ro2 = 30;
+            int ro2 = 40;
+            int ro3 = 30;
 
             ApplyRoundCorners(this, ro1);
 
             ApplyRoundCorners(thanks_panel, ro1);
-            ApplyRoundCorners(thanks_add_bt, ro2);
+            ApplyRoundCorners(thanks_add_bt, ro3);
+
+            ApplyRoundCorners(editdata_menu_open_bt, ro2);
+            ApplyRoundCorners(restore_menu_open_bt, ro2);
+            ApplyRoundCorners(info_menu_open_bt, ro2);
 
             ApplyRoundCorners(openfolder_editdata_menu_panel, ro1);
             ApplyRoundCorners(opentrash_editdata_menu_panel, ro1);
             ApplyRoundCorners(restoretrash_editdata_menu_panel, ro1);
             ApplyRoundCorners(restore_editdata_menu_panel, ro1);
 
-            ApplyRoundCorners(textbox_1_restore_menu_panel, ro2);
-            ApplyRoundCorners(textbox_2_restore_menu_panel, ro2);
+            ApplyRoundCorners(textbox_1_restore_menu_panel, ro3);
+            ApplyRoundCorners(textbox_2_restore_menu_panel, ro3);
             ApplyRoundCorners(restore_bt_restore_menu_panel, ro1);
 
             //버전
