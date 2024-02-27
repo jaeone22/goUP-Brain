@@ -1,4 +1,4 @@
-﻿namespace goUP_Brain
+namespace goUP_Brain
 {
     partial class main
     {
@@ -858,4 +858,3 @@
         private System.Windows.Forms.Label syname_label;
     }
 }
-
