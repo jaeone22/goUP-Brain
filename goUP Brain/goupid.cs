@@ -40,7 +40,7 @@ namespace goUP_Brain
             ApplyRoundCorners(id_panel, ro2);
             ApplyRoundCorners(pw_panel, ro2);
             ApplyRoundCorners(login_bt, ro1);
-            ApplyRoundCorners(tos_bt, ro1);
+            ApplyRoundCorners(tos_bt, ro2);
 
             ApplyRoundCorners(oldpw_panel, ro2);
             ApplyRoundCorners(newpw_panel, ro2);
@@ -632,31 +632,31 @@ namespace goUP_Brain
         {
             /*if (id_textBox.Text.Contains("@duck.com"))
             {
-                id_label.Text = "이메일 | Duck Mail을 사용중이네요. 좋아요!";
+                id_label.Text = "✔️ | 안전해요";
             }
             else if (id_textBox.Text.Contains("@protonmail.com"))
             {
-                id_label.Text = "이메일 | Proton Mail을 사용중이네요. 좋아요!";
+                id_label.Text = "✔️ | 안전해요";
             }
             else if (id_textBox.Text.Contains("@proton.me"))
             {
-                id_label.Text = "이메일 | Proton Mail을 사용중이네요. 좋아요!";
+                id_label.Text = "✔️ | 안전해요";
             }
             else if (id_textBox.Text.Contains("@icloud.com"))
             {
-                id_label.Text = "이메일 | iCloud Mail을 사용중이네요. 좋아요!";
+                id_label.Text = "✔️ | 안전해요";
             }
             else if (id_textBox.Text.Contains("@naver.com"))
             {
-                id_label.Text = "이메일 | goUP ID는 NAVER Mail을 지원하지 않아요";
+                id_label.Text = "⚠️ | 데이터를 암호화하지 않아요";
             }
             else if (id_textBox.Text.Contains("@gmail.com"))
             {
-                id_label.Text = "이메일 | goUP ID는 Gmail을 지원하지 않아요";
+                id_label.Text = "⚠️ | 개인정보 추적 사례가 있어요";
             }
             else
             {
-                id_label.Text = "이메일 | 알수 없는 이메일이에요";
+                id_label.Text = "❔| 이메일 호스트를 알수 없어요";
             }*/
         }
 
