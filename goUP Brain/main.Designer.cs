@@ -37,6 +37,7 @@
             this.goupid_newbackup_bt = new System.Windows.Forms.Button();
             this.title_label = new System.Windows.Forms.Label();
             this.text_panel = new System.Windows.Forms.Panel();
+            this.open_settings_bt = new System.Windows.Forms.Button();
             this.etc_bt = new System.Windows.Forms.Button();
             this.textBox = new System.Windows.Forms.TextBox();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
@@ -44,8 +45,8 @@
             this.goupid_res_bt = new System.Windows.Forms.Button();
             this.nameedit_bt = new System.Windows.Forms.Button();
             this.fastmemo_bt = new System.Windows.Forms.Button();
-            this.title_textBox = new System.Windows.Forms.TextBox();
             this.cloudedit_save_bt = new System.Windows.Forms.Button();
+            this.title_textBox = new System.Windows.Forms.TextBox();
             this.title2_panel = new System.Windows.Forms.Panel();
             this.goupid_bt = new System.Windows.Forms.Button();
             this.close_bt = new System.Windows.Forms.Button();
@@ -69,7 +70,6 @@
             this.beta_info_close_label = new System.Windows.Forms.Label();
             this.beta_info_label = new System.Windows.Forms.Label();
             this.etc_panel = new System.Windows.Forms.Panel();
-            this.open_settings_bt = new System.Windows.Forms.Button();
             this.restore_trash_bt = new System.Windows.Forms.Button();
             this.open_trash_bt = new System.Windows.Forms.Button();
             this.open_folder_bt = new System.Windows.Forms.Button();
@@ -193,6 +193,22 @@
             this.text_panel.Size = new System.Drawing.Size(550, 560);
             this.text_panel.TabIndex = 3;
             // 
+            // open_settings_bt
+            // 
+            this.open_settings_bt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.open_settings_bt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.open_settings_bt.FlatAppearance.BorderSize = 0;
+            this.open_settings_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.open_settings_bt.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.open_settings_bt.Location = new System.Drawing.Point(490, 530);
+            this.open_settings_bt.Name = "open_settings_bt";
+            this.open_settings_bt.Size = new System.Drawing.Size(30, 30);
+            this.open_settings_bt.TabIndex = 7;
+            this.open_settings_bt.Text = "🛠️";
+            this.open_settings_bt.UseVisualStyleBackColor = false;
+            this.open_settings_bt.Click += new System.EventHandler(this.open_settings_bt_Click);
+            // 
             // etc_bt
             // 
             this.etc_bt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -303,21 +319,6 @@
             this.fastmemo_bt.Visible = false;
             this.fastmemo_bt.Click += new System.EventHandler(this.fastmemo_bt_Click);
             // 
-            // title_textBox
-            // 
-            this.title_textBox.BackColor = System.Drawing.Color.White;
-            this.title_textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.title_textBox.Font = new System.Drawing.Font("맑은 고딕", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.title_textBox.ForeColor = System.Drawing.Color.Black;
-            this.title_textBox.Location = new System.Drawing.Point(10, 10);
-            this.title_textBox.Name = "title_textBox";
-            this.title_textBox.Size = new System.Drawing.Size(394, 39);
-            this.title_textBox.TabIndex = 1;
-            this.title_textBox.Text = "열린 시냅스가 없어요";
-            this.title_textBox.TextChanged += new System.EventHandler(this.title_textBox_TextChanged);
-            this.title_textBox.Enter += new System.EventHandler(this.title_textBox_Enter);
-            this.title_textBox.Leave += new System.EventHandler(this.title_textBox_Leave);
-            // 
             // cloudedit_save_bt
             // 
             this.cloudedit_save_bt.BackColor = System.Drawing.Color.DodgerBlue;
@@ -333,6 +334,21 @@
             this.cloudedit_save_bt.UseVisualStyleBackColor = false;
             this.cloudedit_save_bt.Visible = false;
             this.cloudedit_save_bt.Click += new System.EventHandler(this.cloudedit_save_bt_Click);
+            // 
+            // title_textBox
+            // 
+            this.title_textBox.BackColor = System.Drawing.Color.White;
+            this.title_textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.title_textBox.Font = new System.Drawing.Font("맑은 고딕", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.title_textBox.ForeColor = System.Drawing.Color.Black;
+            this.title_textBox.Location = new System.Drawing.Point(10, 10);
+            this.title_textBox.Name = "title_textBox";
+            this.title_textBox.Size = new System.Drawing.Size(394, 39);
+            this.title_textBox.TabIndex = 1;
+            this.title_textBox.Text = "열린 시냅스가 없어요";
+            this.title_textBox.TextChanged += new System.EventHandler(this.title_textBox_TextChanged);
+            this.title_textBox.Enter += new System.EventHandler(this.title_textBox_Enter);
+            this.title_textBox.Leave += new System.EventHandler(this.title_textBox_Leave);
             // 
             // title2_panel
             // 
@@ -513,10 +529,10 @@
             // 
             // minimode_panel
             // 
-            this.minimode_panel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.minimode_panel.BackColor = System.Drawing.Color.White;
             this.minimode_panel.Controls.Add(this.minimode_close_bt);
             this.minimode_panel.Controls.Add(this.minimode_label);
-            this.minimode_panel.Location = new System.Drawing.Point(0, 0);
+            this.minimode_panel.Location = new System.Drawing.Point(500, 0);
             this.minimode_panel.Name = "minimode_panel";
             this.minimode_panel.Size = new System.Drawing.Size(250, 40);
             this.minimode_panel.TabIndex = 5;
@@ -562,6 +578,7 @@
             this.beta_info_panel.Name = "beta_info_panel";
             this.beta_info_panel.Size = new System.Drawing.Size(250, 65);
             this.beta_info_panel.TabIndex = 10;
+            this.beta_info_panel.Visible = false;
             // 
             // beta_info_github_label
             // 
@@ -608,22 +625,6 @@
             this.etc_panel.Size = new System.Drawing.Size(200, 90);
             this.etc_panel.TabIndex = 11;
             this.etc_panel.Visible = false;
-            // 
-            // open_settings_bt
-            // 
-            this.open_settings_bt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.open_settings_bt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
-            this.open_settings_bt.FlatAppearance.BorderSize = 0;
-            this.open_settings_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.open_settings_bt.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.open_settings_bt.Location = new System.Drawing.Point(490, 530);
-            this.open_settings_bt.Name = "open_settings_bt";
-            this.open_settings_bt.Size = new System.Drawing.Size(30, 30);
-            this.open_settings_bt.TabIndex = 7;
-            this.open_settings_bt.Text = "🛠️";
-            this.open_settings_bt.UseVisualStyleBackColor = false;
-            this.open_settings_bt.Click += new System.EventHandler(this.open_settings_bt_Click);
             // 
             // restore_trash_bt
             // 

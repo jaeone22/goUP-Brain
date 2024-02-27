@@ -1682,7 +1682,7 @@ namespace goUP_Brain
             if (listBox.SelectedItem != null)
             {
                 int count = 1;
-                open_cloudedit_bt_Click(sender, e);
+                //open_cloudedit_bt_Click(sender, e);
 
                 while (cloudedit_listBox.Items.Contains("새로운 시냅스 " + count))
                 {
@@ -1733,6 +1733,8 @@ namespace goUP_Brain
                             if (addMemoResponse.IsSuccessStatusCode)
                             {
                                 string addMemoResult = await addMemoResponse.Content.ReadAsStringAsync();
+
+                                open_cloudedit_bt_Click(sender, e);
 
                                 //알림 뛰우기
                                 info_text = "goUP Cloud에 시냅스를 만들었어요";
@@ -1818,7 +1820,7 @@ namespace goUP_Brain
                                 infobox(sender, e);
 
                                 // 메모 목록 갱신
-                                openfolder_bt_Click(sender, e);
+                                open_cloudedit_bt_Click(sender, e);
                             }
                             else
                             {
