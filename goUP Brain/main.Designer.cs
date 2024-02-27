@@ -532,7 +532,7 @@
             this.minimode_panel.BackColor = System.Drawing.Color.White;
             this.minimode_panel.Controls.Add(this.minimode_close_bt);
             this.minimode_panel.Controls.Add(this.minimode_label);
-            this.minimode_panel.Location = new System.Drawing.Point(500, 0);
+            this.minimode_panel.Location = new System.Drawing.Point(0, 0);
             this.minimode_panel.Name = "minimode_panel";
             this.minimode_panel.Size = new System.Drawing.Size(250, 40);
             this.minimode_panel.TabIndex = 5;
