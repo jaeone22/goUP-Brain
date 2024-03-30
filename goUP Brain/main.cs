@@ -244,35 +244,25 @@ namespace goUP_Brain
                 mode_bt.Text = "수정 모드로 전환하기";
 
                 //마크다운 변환
-                StringBuilder result = new StringBuilder();
-                bool isInMarkdown = false;
-                List<string> ignoreList = new List<string> { "#", "-", "" }; // 무시할 항목들
+                if_readmode = true;
 
-                foreach (char c in textBox.Text)
-                {
-                    if (ignoreList.Any(ignore => textBox.Text.StartsWith(ignore)))
-                    {
-                        isInMarkdown = true;
-                        result.Append(c);
-                    }
-                    else if (c == '\n' && isInMarkdown)
-                    {
-                        // 무시
-                    }
-                    else
-                    {
-                        isInMarkdown = false;
-                        result.Append(c);
-                    }
-                }
+                textBox.Visible = false;
+                webBrowser.Visible = true;
+
+                mode_bt.Text = "수정 모드로 전환하기";
 
                 // Markdown 변환
                 string markdownText = Markdig.Markdown.ToHtml(textBox.Text);
 
                 // 변환된 텍스트를 WebBrowser 컨트롤에 표시
-                webBrowser.DocumentText = markdownText.Replace("\n", "<br>");
+                markdownText = markdownText.Replace("\n", "<br>");
+                markdownText = markdownText.Replace("{::emoticon-1::}", "<img src=\"https://files.goup.ggm.kr/em/em_1.png\">");
+                webBrowser.DocumentText = markdownText.Replace("{::emoticon-2::}", "<img src=\"https://files.goup.ggm.kr/em/em_2.png\">");
 
-                //MessageBox.Show(result.ToString());
+                if (devmode == true)
+                {
+                    webBrowser.DocumentText = textBox.Text;
+                }
 
                 ChangeWebBrowserStyle(webBrowser);
             }
@@ -623,6 +613,8 @@ namespace goUP_Brain
         {
             if (if_readmode == true)
             {
+                em_bt.Visible = true;
+
                 if_readmode = false;
 
                 textBox.Visible = true;
@@ -632,6 +624,18 @@ namespace goUP_Brain
             }
             else
             {
+                //이모티콘닫기
+                em_panel_isopen = false;
+
+                em_panel.Visible = false;
+
+                em_bt.BackColor = Color.FromArgb(250, 250, 250);
+                em_bt.ForeColor = Color.Black;
+
+                em_bt.Visible = false;
+
+
+                //시작
                 if_readmode = true;
 
                 textBox.Visible = false;
@@ -643,7 +647,14 @@ namespace goUP_Brain
                 string markdownText = Markdig.Markdown.ToHtml(textBox.Text);
 
                 // 변환된 텍스트를 WebBrowser 컨트롤에 표시
-                webBrowser.DocumentText = markdownText.Replace("\n", "<br>");
+                markdownText = markdownText.Replace("\n", "<br>");
+                markdownText = markdownText.Replace("{::emoticon-1::}", "<img src=\"https://files.goup.ggm.kr/em/em_1.png\">");
+                webBrowser.DocumentText = markdownText.Replace("{::emoticon-2::}", "<img src=\"https://files.goup.ggm.kr/em/em_2.png\">");
+
+                if (devmode == true)
+                {
+                    webBrowser.DocumentText = textBox.Text;
+                }
 
                 ChangeWebBrowserStyle(webBrowser);
             }
@@ -1640,38 +1651,27 @@ namespace goUP_Brain
             mode_bt.Text = "수정 모드로 전환하기";
 
             //마크다운 변환
-            StringBuilder result = new StringBuilder();
-            bool isInMarkdown = false;
-            List<string> ignoreList = new List<string> { "#", "-", "" }; // 무시할 항목들
+            if_readmode = true;
 
-            foreach (char c in textBox.Text)
-            {
-                if (ignoreList.Any(ignore => textBox.Text.StartsWith(ignore)))
-                {
-                    isInMarkdown = true;
-                    result.Append(c);
-                }
-                else if (c == '\n' && isInMarkdown)
-                {
-                    // 무시
-                }
-                else
-                {
-                    isInMarkdown = false;
-                    result.Append(c);
-                }
-            }
+            textBox.Visible = false;
+            webBrowser.Visible = true;
+
+            mode_bt.Text = "수정 모드로 전환하기";
 
             // Markdown 변환
             string markdownText = Markdig.Markdown.ToHtml(textBox.Text);
 
             // 변환된 텍스트를 WebBrowser 컨트롤에 표시
-            webBrowser.DocumentText = markdownText.Replace("\n", "<br>");
+            markdownText = markdownText.Replace("\n", "<br>");
+            markdownText = markdownText.Replace("{::emoticon-1::}", "<img src=\"https://files.goup.ggm.kr/em/em_1.png\">");
+            webBrowser.DocumentText = markdownText.Replace("{::emoticon-2::}", "<img src=\"https://files.goup.ggm.kr/em/em_2.png\">");
 
-            //MessageBox.Show(result.ToString());
+            if (devmode == true)
+            {
+                webBrowser.DocumentText = textBox.Text;
+            }
 
             ChangeWebBrowserStyle(webBrowser);
-
         }
 
         private async void new_cloudedit_bt_Click(object sender, EventArgs e)
@@ -1773,7 +1773,7 @@ namespace goUP_Brain
             {
                 //if (MessageBox.Show("삭제하기 전 로컬 폴더에 시냅스를 복사할까요?", "goUP ID", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                 {
-                    
+
                 }
 
                 email = Properties.Settings.Default.id;
@@ -1957,6 +1957,112 @@ namespace goUP_Brain
                 info_panel.BackColor = Color.DodgerBlue;
                 infobox(sender, e);
             }*/
+        }
+
+        bool em_panel_isopen = false;
+
+        private void em_bt_Click(object sender, EventArgs e)
+        {
+            if (em_panel_isopen != true)
+            {
+                //열기
+                em_panel_isopen = true;
+
+                em_panel.Visible = true;
+
+                em_bt.BackColor = Color.DodgerBlue;
+                em_bt.ForeColor = Color.White;
+            }
+            else
+            {
+                //닫기
+                em_panel_isopen = false;
+
+                em_panel.Visible = false;
+
+                em_bt.BackColor = Color.FromArgb(250, 250, 250);
+                em_bt.ForeColor = Color.Black;
+            }
+        }
+
+        private void em_1_Click(object sender, EventArgs e)
+        {
+            // 현재 텍스트박스의 커서 위치를 가져옵니다.
+            int cursorPosition = textBox.SelectionStart;
+
+            // 특정 텍스트를 가져옵니다.
+            string textToInsert = "{::emoticon-1::}";
+
+            // 현재 텍스트박스의 텍스트를 가져옵니다.
+            string currentText = textBox.Text;
+
+            // 커서 위치에 특정 텍스트를 삽입합니다.
+            string newText = currentText.Substring(0, cursorPosition) + textToInsert + currentText.Substring(cursorPosition);
+
+            // 텍스트박스에 새로운 텍스트를 설정합니다.
+            textBox.Text = newText;
+
+            // 커서 위치를 설정합니다. (삽입된 텍스트 끝으로 이동)
+            textBox.SelectionStart = cursorPosition + textToInsert.Length;
+
+            // 이모티콘 창 닫기
+            em_bt_Click(sender, e);
+
+            // 포커스를 텍스트박스로 이동합니다.
+            textBox.Focus();
+        }
+
+        private void em_2_Click(object sender, EventArgs e)
+        {
+            // 현재 텍스트박스의 커서 위치를 가져옵니다.
+            int cursorPosition = textBox.SelectionStart;
+
+            // 특정 텍스트를 가져옵니다.
+            string textToInsert = "{::emoticon-2::}";
+
+            // 현재 텍스트박스의 텍스트를 가져옵니다.
+            string currentText = textBox.Text;
+
+            // 커서 위치에 특정 텍스트를 삽입합니다.
+            string newText = currentText.Substring(0, cursorPosition) + textToInsert + currentText.Substring(cursorPosition);
+
+            // 텍스트박스에 새로운 텍스트를 설정합니다.
+            textBox.Text = newText;
+
+            // 커서 위치를 설정합니다. (삽입된 텍스트 끝으로 이동)
+            textBox.SelectionStart = cursorPosition + textToInsert.Length;
+
+            // 이모티콘 창 닫기
+            em_bt_Click(sender, e);
+
+            // 포커스를 텍스트박스로 이동합니다.
+            textBox.Focus();
+        }
+
+        bool devmode = false;
+
+        private void devmode_bt_Click(object sender, EventArgs e)
+        {
+            if (devmode == true)
+            {
+                devmode = false;
+                devmode_bt.Text = "⚙️ 개발자 모드";
+                devmode_bt.BackColor = Color.White;
+                devmode_bt.ForeColor = Color.Black;
+                textBox.BackColor = Color.White;
+                textBox.ForeColor = Color.Black;
+            }
+            else
+            {
+                devmode = true;
+                devmode_bt.Text = "⚙️ 개발자 모드 [켜짐]";
+                devmode_bt.BackColor = Color.DodgerBlue;
+                devmode_bt.ForeColor = Color.White;
+                textBox.BackColor = Color.Black;
+                textBox.ForeColor = Color.White;
+
+                MessageBox.Show("개발자 모드가 켜졌어요\r\n개발자 모드의 기능을 사용하려면 아래처럼 하면 돼요\r\n1. 코드를 시냅스에 적어주세요\r\n2. [마크다운 모드로 전환하기]를 클릭해주세요\r\n3. 마크다운 모드 대신 웹페이지가 열려요\r\n\r\n⚠️ 주의\r\n라이브 미리보기는 Internet Explorer 모드에서 실행돼요\r\n실제 유저가 보는 환경과 다르게 표시될수 있어요\r\n또한 단일 HTML, CSS 코드만 지원해요\r\nJS, NextJS같은 스크립트 실행이 불가능해요");
+            }
         }
     }
 }
