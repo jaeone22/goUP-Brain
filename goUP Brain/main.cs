@@ -1,14 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using DiscordRPC;
+using DiscordRPC.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
-using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace goUP_Brain
@@ -34,8 +37,11 @@ namespace goUP_Brain
             //라운드 처리
             round(sender, e);
 
+            //디스코드
+            discord_start();
+
             //버전
-            beta_info_label.Text = "⚠️ | goUP Brain " + Properties.app.Default.version;
+            beta_info_label.Text = "⚠️ Beta | goUP Brain " + Properties.app.Default.version;
 
             //베타
             if (Properties.app.Default.is_beta == true)
@@ -57,6 +63,50 @@ namespace goUP_Brain
             {
                 listBox.SelectedIndex = 0;
             }
+        }
+
+        public DiscordRpcClient client;
+
+        private void discord_start()
+        {
+            client = new DiscordRpcClient("1227451314838175814");
+
+            //Set the logger
+            client.Logger = new ConsoleLogger() { Level = LogLevel.Warning };
+
+            //Subscribe to events
+            client.OnReady += (sender, e) =>
+            {
+                //MessageBox.Show("Received Ready from user {0}", e.User.Username);
+            };
+
+            client.OnPresenceUpdate += (sender, e) =>
+            {
+                //MessageBox.Show("Received Update! {0}", e.Presence.ToString());
+            };
+
+            //Connect to the RPC
+            client.Initialize();
+
+            //Set the rich presence
+            //Call this as many times as you want and anywhere in your code.
+            client.SetPresence(new RichPresence()
+            {
+                Details = "시냅스 편집중",
+                //State = "시냅스 편집중",
+
+                Buttons = new DiscordRPC.Button[]
+                {
+                    new DiscordRPC.Button() { Label = "goUP Brain 다운로드", Url = "https://goup.ggm.kr/download" },
+                    new DiscordRPC.Button() { Label = "더 알아보기", Url = "https://goup.ggm.kr/apps/goup-brain" }
+                },
+
+                Assets = new Assets()
+                {
+                    LargeImageKey = "goup_brain",
+                    LargeImageText = "goUP Brain"
+                }
+            });
         }
 
         private void round(object sender, EventArgs e)
@@ -220,7 +270,7 @@ namespace goUP_Brain
             {
                 //알림 뛰우기
                 info_text = "시냅스를 휴지통으로 이동할수 없어요";
-                info_panel.BackColor = Color.Red;
+                info_panel.BackColor = Color.OrangeRed;
                 infobox(sender, e);
             }
         }
@@ -236,12 +286,15 @@ namespace goUP_Brain
 
             if (goupid_title1_panel.Visible == false)
             {
-                if_readmode = true;
+                //이모티콘닫기
+                em_panel_isopen = false;
 
-                textBox.Visible = false;
-                webBrowser.Visible = true;
+                em_panel.Visible = false;
 
-                mode_bt.Text = "수정 모드로 전환하기";
+                em_bt.BackColor = Color.FromArgb(250, 250, 250);
+                em_bt.ForeColor = Color.Black;
+
+                em_bt.Visible = false;
 
                 //마크다운 변환
                 if_readmode = true;
@@ -256,8 +309,15 @@ namespace goUP_Brain
 
                 // 변환된 텍스트를 WebBrowser 컨트롤에 표시
                 markdownText = markdownText.Replace("\n", "<br>");
-                markdownText = markdownText.Replace("{::emoticon-1::}", "<img src=\"https://files.goup.ggm.kr/em/em_1.png\">");
-                webBrowser.DocumentText = markdownText.Replace("{::emoticon-2::}", "<img src=\"https://files.goup.ggm.kr/em/em_2.png\">");
+
+                markdownText = Regex.Replace(markdownText, @"\{::emoticon-(\d+)::\}", m =>
+                {
+                    int number = int.Parse(m.Groups[1].Value);
+                    string imagePath = $"C:\\goUP\\BrainApp\\em_{number}.png";
+                    return $"<img src=\"{imagePath}\" alt=\"emoticon-{number}\" />";
+                });
+
+                webBrowser.DocumentText = markdownText;
 
                 if (devmode == true)
                 {
@@ -351,7 +411,7 @@ namespace goUP_Brain
                 {
                     //알림 뛰우기
                     info_text = "제목을 바꿀수 없어요";
-                    info_panel.BackColor = Color.Red;
+                    info_panel.BackColor = Color.OrangeRed;
                     infobox(sender, e);
                 }
                 else
@@ -373,7 +433,7 @@ namespace goUP_Brain
                     {
                         //알림 뛰우기
                         info_text = "제목을 바꿀수 없어요";
-                        info_panel.BackColor = Color.Red;
+                        info_panel.BackColor = Color.OrangeRed;
                         infobox(sender, e);
                     }
                 }
@@ -434,7 +494,7 @@ namespace goUP_Brain
                                 {
                                     //알림 뛰우기
                                     info_text = "⚠️ | 앱에 문제가 있어요";
-                                    info_panel.BackColor = Color.Red;
+                                    info_panel.BackColor = Color.OrangeRed;
                                     infobox(sender, e);
 
                                     MessageBox.Show("앱에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + renameMemoResult, "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -444,7 +504,7 @@ namespace goUP_Brain
                                 {
                                     //알림 뛰우기
                                     info_text = "⚠️ | 앱 또는 서버에 문제가 있어요";
-                                    info_panel.BackColor = Color.Red;
+                                    info_panel.BackColor = Color.OrangeRed;
                                     infobox(sender, e);
 
                                     MessageBox.Show("앱 또는 서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + renameMemoResult, "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -454,7 +514,7 @@ namespace goUP_Brain
                                 {
                                     //알림 뛰우기
                                     info_text = "⚠️ | 알수 없는 문제가 있어요";
-                                    info_panel.BackColor = Color.Red;
+                                    info_panel.BackColor = Color.OrangeRed;
                                     infobox(sender, e);
 
                                     MessageBox.Show("알수 없는 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + renameMemoResult, "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -467,7 +527,7 @@ namespace goUP_Brain
                             {
                                 //알림 뛰우기
                                 info_text = "⚠️ | 서버에 문제가 있어요";
-                                info_panel.BackColor = Color.Red;
+                                info_panel.BackColor = Color.OrangeRed;
                                 infobox(sender, e);
 
                                 MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + renameMemoResponse.StatusCode, "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -477,7 +537,7 @@ namespace goUP_Brain
                         {
                             //알림 뛰우기
                             info_text = "⚠️ | 서버에 문제가 있어요";
-                            info_panel.BackColor = Color.Red;
+                            info_panel.BackColor = Color.OrangeRed;
                             infobox(sender, e);
 
                             MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + ex, "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -488,7 +548,7 @@ namespace goUP_Brain
                 {
                     //알림 뛰우기
                     info_text = "⚠️ | 시냅스 제목을 입력해주세요";
-                    info_panel.BackColor = Color.Red;
+                    info_panel.BackColor = Color.OrangeRed;
                     infobox(sender, e);
                 }
             }
@@ -648,8 +708,15 @@ namespace goUP_Brain
 
                 // 변환된 텍스트를 WebBrowser 컨트롤에 표시
                 markdownText = markdownText.Replace("\n", "<br>");
-                markdownText = markdownText.Replace("{::emoticon-1::}", "<img src=\"https://files.goup.ggm.kr/em/em_1.png\">");
-                webBrowser.DocumentText = markdownText.Replace("{::emoticon-2::}", "<img src=\"https://files.goup.ggm.kr/em/em_2.png\">");
+
+                markdownText = Regex.Replace(markdownText, @"\{::emoticon-(\d+)::\}", m =>
+                {
+                    int number = int.Parse(m.Groups[1].Value);
+                    string imagePath = $"C:\\goUP\\BrainApp\\em_{number}.png";
+                    return $"<img src=\"{imagePath}\" alt=\"emoticon-{number}\" />";
+                });
+
+                webBrowser.DocumentText = markdownText;
 
                 if (devmode == true)
                 {
@@ -776,7 +843,7 @@ namespace goUP_Brain
 
                                     //알림 뛰우기
                                     info_text = "⚠️ | 시냅스를 복호화할수 없어요";
-                                    info_panel.BackColor = Color.Red;
+                                    info_panel.BackColor = Color.OrangeRed;
                                     infobox(sender, e);
 
                                     MessageBox.Show("시냅스를 복구할수 없어요\r\n대신 암호화된 내용을 로드했어요\r\n설정 ❯ 시냅스 복구에서 시냅스를 복구해주세요", "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -791,7 +858,7 @@ namespace goUP_Brain
                             {
                                 //알림 뛰우기
                                 info_text = "⚠️ | 서버에 문제가 있어요";
-                                info_panel.BackColor = Color.Red;
+                                info_panel.BackColor = Color.OrangeRed;
                                 infobox(sender, e);
 
                                 MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + getMemoContentResponse.StatusCode,
@@ -802,7 +869,7 @@ namespace goUP_Brain
                         {
                             //알림 뛰우기
                             info_text = "⚠️ | 서버에 문제가 있어요";
-                            info_panel.BackColor = Color.Red;
+                            info_panel.BackColor = Color.OrangeRed;
                             infobox(sender, e);
 
                             MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + ex.Message,
@@ -814,7 +881,7 @@ namespace goUP_Brain
                 {
                     //알림 뛰우기
                     /*info_text = "⚠️ | goUP Brain 앱에 문제가 있어요";
-                    info_panel.BackColor = Color.Red;
+                    info_panel.BackColor = Color.OrangeRed;
                     infobox(sender, e);
 
                     MessageBox.Show("goUP Brain 앱에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + "\"error/goup/brain/web/not-seleted-memo/0001\"",
@@ -884,7 +951,7 @@ namespace goUP_Brain
 
                                 //알림 뛰우기
                                 info_text = "⚠️ | 시냅스를 복호화할수 없어요";
-                                info_panel.BackColor = Color.Red;
+                                info_panel.BackColor = Color.OrangeRed;
                                 infobox(sender, e);
 
                                 MessageBox.Show("시냅스를 복구할수 없어요\r\n대신 암호화된 내용을 저장했어요\r\n설정 ❯ 시냅스 복구에서 시냅스를 복구해주세요", "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -903,7 +970,7 @@ namespace goUP_Brain
                         {
                             //알림 뛰우기
                             info_text = "⚠️ | 서버에 문제가 있어요";
-                            info_panel.BackColor = Color.Red;
+                            info_panel.BackColor = Color.OrangeRed;
                             infobox(sender, e);
 
                             MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + getMemoContentResponse.StatusCode, "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -913,7 +980,7 @@ namespace goUP_Brain
                     {
                         //알림 뛰우기
                         info_text = "⚠️ | 서버에 문제가 있어요";
-                        info_panel.BackColor = Color.Red;
+                        info_panel.BackColor = Color.OrangeRed;
                         infobox(sender, e);
 
                         MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + ex, "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -924,7 +991,7 @@ namespace goUP_Brain
             {
                 //알림 뛰우기
                 info_text = "⚠️ | goUP Brain 앱에 문제가 있어요";
-                info_panel.BackColor = Color.Red;
+                info_panel.BackColor = Color.OrangeRed;
                 infobox(sender, e);
 
                 MessageBox.Show("goUP Brain 앱에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + "error/goup/brain/web/not-seleted-memo/0001", "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -950,7 +1017,7 @@ namespace goUP_Brain
                 {
                     //알림 뛰우기
                     info_text = "⚠️ | 시냅스를 암호화할수 없어요. 백업하지 못했어요";
-                    info_panel.BackColor = Color.Red;
+                    info_panel.BackColor = Color.OrangeRed;
                     infobox(sender, e);
                 }
                 else
@@ -992,7 +1059,7 @@ namespace goUP_Brain
                             {
                                 //알림 뛰우기
                                 info_text = "⚠️ | 서버에 문제가 있어요";
-                                info_panel.BackColor = Color.Red;
+                                info_panel.BackColor = Color.OrangeRed;
                                 infobox(sender, e);
 
                                 MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + addMemoResponse.StatusCode,
@@ -1003,7 +1070,7 @@ namespace goUP_Brain
                         {
                             //알림 뛰우기
                             info_text = "⚠️ | 서버에 문제가 있어요";
-                            info_panel.BackColor = Color.Red;
+                            info_panel.BackColor = Color.OrangeRed;
                             infobox(sender, e);
 
                             MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + ex.Message,
@@ -1066,7 +1133,7 @@ namespace goUP_Brain
                         {
                             //알림 뛰우기
                             info_text = "⚠️ | 서버에 문제가 있어요";
-                            info_panel.BackColor = Color.Red;
+                            info_panel.BackColor = Color.OrangeRed;
                             infobox(sender, e);
 
                             MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + deleteMemoResponse.StatusCode,
@@ -1077,7 +1144,7 @@ namespace goUP_Brain
                     {
                         //알림 뛰우기
                         info_text = "⚠️ | 서버에 문제가 있어요";
-                        info_panel.BackColor = Color.Red;
+                        info_panel.BackColor = Color.OrangeRed;
                         infobox(sender, e);
 
                         MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + ex.Message,
@@ -1089,7 +1156,7 @@ namespace goUP_Brain
             {
                 //알림 뛰우기
                 info_text = "⚠️ | goUP Brain 앱에 문제가 있어요";
-                info_panel.BackColor = Color.Red;
+                info_panel.BackColor = Color.OrangeRed;
                 infobox(sender, e);
 
                 MessageBox.Show("goUP Brain 앱에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + "error/goup/brain/web/not-seleted-memo/0001",
@@ -1260,7 +1327,7 @@ namespace goUP_Brain
                 {
                     //알림 뛰우기
                     info_text = "⚠️ | 시냅스를 복원할수 없어요";
-                    info_panel.BackColor = Color.Red;
+                    info_panel.BackColor = Color.OrangeRed;
                     infobox(sender, e);
 
                     MessageBox.Show("goUP Brain 앱에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + ex.Message,
@@ -1365,7 +1432,7 @@ namespace goUP_Brain
                         {
                             //알림 뛰우기
                             info_text = "⚠️ | 서버에 문제가 있어요";
-                            info_panel.BackColor = Color.Red;
+                            info_panel.BackColor = Color.OrangeRed;
                             infobox(sender, e);
 
                             MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + getMemosResponse.StatusCode, "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -1375,7 +1442,7 @@ namespace goUP_Brain
                     {
                         //알림 뛰우기
                         info_text = "⚠️ | 서버에 문제가 있어요";
-                        info_panel.BackColor = Color.Red;
+                        info_panel.BackColor = Color.OrangeRed;
                         infobox(sender, e);
 
                         MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + ex, "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -1386,7 +1453,7 @@ namespace goUP_Brain
             {
                 //알림 뛰우기
                 info_text = "⚠️ | goUP ID에 로그인해야 사용할수 있어요";
-                info_panel.BackColor = Color.Red;
+                info_panel.BackColor = Color.OrangeRed;
                 infobox(sender, e);
             }
         }
@@ -1512,7 +1579,7 @@ namespace goUP_Brain
                         {
                             //알림 뛰우기
                             info_text = "⚠️ | 서버에 문제가 있어요";
-                            info_panel.BackColor = Color.Red;
+                            info_panel.BackColor = Color.OrangeRed;
                             infobox(sender, e);
 
                             MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + getMemosResponse.StatusCode, "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -1522,7 +1589,7 @@ namespace goUP_Brain
                     {
                         //알림 뛰우기
                         info_text = "⚠️ | 서버에 문제가 있어요";
-                        info_panel.BackColor = Color.Red;
+                        info_panel.BackColor = Color.OrangeRed;
                         infobox(sender, e);
 
                         MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + ex, "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -1533,7 +1600,7 @@ namespace goUP_Brain
             {
                 //알림 뛰우기
                 info_text = "⚠️ | goUP ID에 로그인해야 사용할수 있어요";
-                info_panel.BackColor = Color.Red;
+                info_panel.BackColor = Color.OrangeRed;
                 infobox(sender, e);
             }
         }
@@ -1542,6 +1609,16 @@ namespace goUP_Brain
 
         private async void cloudedit_listBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //이모티콘닫기
+            em_panel_isopen = false;
+
+            em_panel.Visible = false;
+
+            em_bt.BackColor = Color.FromArgb(250, 250, 250);
+            em_bt.ForeColor = Color.Black;
+
+            em_bt.Visible = false;
+
             email = Properties.Settings.Default.id;
             password = Properties.Settings.Default.pw;
 
@@ -1591,7 +1668,7 @@ namespace goUP_Brain
 
                                     //알림 뛰우기
                                     info_text = "⚠️ | 시냅스를 복호화할수 없어요";
-                                    info_panel.BackColor = Color.Red;
+                                    info_panel.BackColor = Color.OrangeRed;
                                     infobox(sender, e);
 
                                     MessageBox.Show("시냅스를 복구할수 없어요\r\n대신 암호화된 내용을 로드했어요\r\n설정 ❯ 시냅스 복구에서 시냅스를 복구해주세요", "goUP ID", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -1612,7 +1689,7 @@ namespace goUP_Brain
                             {
                                 //알림 뛰우기
                                 info_text = "⚠️ | 서버에 문제가 있어요";
-                                info_panel.BackColor = Color.Red;
+                                info_panel.BackColor = Color.OrangeRed;
                                 infobox(sender, e);
 
                                 MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + getMemoContentResponse.StatusCode,
@@ -1623,7 +1700,7 @@ namespace goUP_Brain
                         {
                             //알림 뛰우기
                             info_text = "⚠️ | 서버에 문제가 있어요";
-                            info_panel.BackColor = Color.Red;
+                            info_panel.BackColor = Color.OrangeRed;
                             infobox(sender, e);
 
                             MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + ex.Message,
@@ -1635,7 +1712,7 @@ namespace goUP_Brain
                 {
                     //알림 뛰우기
                     /*info_text = "⚠️ | goUP Brain 앱에 문제가 있어요";
-                    info_panel.BackColor = Color.Red;
+                    info_panel.BackColor = Color.OrangeRed;
                     infobox(sender, e);
 
                     MessageBox.Show("goUP Brain 앱에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + "\"error/goup/brain/web/not-seleted-memo/0001\"",
@@ -1663,8 +1740,15 @@ namespace goUP_Brain
 
             // 변환된 텍스트를 WebBrowser 컨트롤에 표시
             markdownText = markdownText.Replace("\n", "<br>");
-            markdownText = markdownText.Replace("{::emoticon-1::}", "<img src=\"https://files.goup.ggm.kr/em/em_1.png\">");
-            webBrowser.DocumentText = markdownText.Replace("{::emoticon-2::}", "<img src=\"https://files.goup.ggm.kr/em/em_2.png\">");
+
+            markdownText = Regex.Replace(markdownText, @"\{::emoticon-(\d+)::\}", m =>
+            {
+                int number = int.Parse(m.Groups[1].Value);
+                string imagePath = $"C:\\goUP\\BrainApp\\em_{number}.png";
+                return $"<img src=\"{imagePath}\" alt=\"emoticon-{number}\" />";
+            });
+
+            webBrowser.DocumentText = markdownText;
 
             if (devmode == true)
             {
@@ -1701,7 +1785,7 @@ namespace goUP_Brain
                 {
                     //알림 뛰우기
                     info_text = "⚠️ | 시냅스를 암호화할수 없어요. 시냅스를 만들지 못했어요";
-                    info_panel.BackColor = Color.Red;
+                    info_panel.BackColor = Color.OrangeRed;
                     infobox(sender, e);
                 }
                 else
@@ -1745,7 +1829,7 @@ namespace goUP_Brain
                             {
                                 //알림 뛰우기
                                 info_text = "⚠️ | 서버에 문제가 있어요";
-                                info_panel.BackColor = Color.Red;
+                                info_panel.BackColor = Color.OrangeRed;
                                 infobox(sender, e);
 
                                 MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + addMemoResponse.StatusCode,
@@ -1756,7 +1840,7 @@ namespace goUP_Brain
                         {
                             //알림 뛰우기
                             info_text = "⚠️ | 서버에 문제가 있어요";
-                            info_panel.BackColor = Color.Red;
+                            info_panel.BackColor = Color.OrangeRed;
                             infobox(sender, e);
 
                             MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + ex.Message,
@@ -1826,7 +1910,7 @@ namespace goUP_Brain
                             {
                                 //알림 뛰우기
                                 info_text = "⚠️ | 서버에 문제가 있어요";
-                                info_panel.BackColor = Color.Red;
+                                info_panel.BackColor = Color.OrangeRed;
                                 infobox(sender, e);
 
                                 MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + deleteMemoResponse.StatusCode,
@@ -1837,7 +1921,7 @@ namespace goUP_Brain
                         {
                             //알림 뛰우기
                             info_text = "⚠️ | 서버에 문제가 있어요";
-                            info_panel.BackColor = Color.Red;
+                            info_panel.BackColor = Color.OrangeRed;
                             infobox(sender, e);
 
                             MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + ex.Message,
@@ -1849,7 +1933,7 @@ namespace goUP_Brain
                 {
                     //알림 뛰우기
                     info_text = "⚠️ | goUP Brain 앱에 문제가 있어요";
-                    info_panel.BackColor = Color.Red;
+                    info_panel.BackColor = Color.OrangeRed;
                     infobox(sender, e);
 
                     MessageBox.Show("goUP Brain 앱에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + "error/goup/brain/web/not-seleted-memo/0001",
@@ -1876,7 +1960,7 @@ namespace goUP_Brain
             {
                 //알림 뛰우기
                 info_text = "⚠️ | 시냅스를 암호화할수 없어요. 시냅스를 만들지 못했어요";
-                info_panel.BackColor = Color.Red;
+                info_panel.BackColor = Color.OrangeRed;
                 infobox(sender, e);
             }
             else
@@ -1920,7 +2004,7 @@ namespace goUP_Brain
                         {
                             //알림 뛰우기
                             info_text = "⚠️ | 서버에 문제가 있어요";
-                            info_panel.BackColor = Color.Red;
+                            info_panel.BackColor = Color.OrangeRed;
                             infobox(sender, e);
 
                             MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + addMemoResponse.StatusCode,
@@ -1931,7 +2015,7 @@ namespace goUP_Brain
                     {
                         //알림 뛰우기
                         info_text = "⚠️ | 서버에 문제가 있어요";
-                        info_panel.BackColor = Color.Red;
+                        info_panel.BackColor = Color.OrangeRed;
                         infobox(sender, e);
 
                         MessageBox.Show("서버에 문제가 있어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + ex.Message,
@@ -1965,6 +2049,33 @@ namespace goUP_Brain
         {
             if (em_panel_isopen != true)
             {
+                // 이모티콘 파일 불러오기
+                em_listBox.Items.Clear();
+
+                string savePath = @"C:\goUP\BrainApp\em.goup";
+
+                if (File.Exists(savePath))
+                {
+                    using (StreamReader sr = new StreamReader(savePath))
+                    {
+                        // 파일의 끝까지 한 줄씩 읽어오면서 리스트박스에 추가합니다.
+                        string line;
+                        while ((line = sr.ReadLine()) != null)
+                        {
+                            em_listBox.Items.Add(line);
+                        }
+                    }
+                }
+
+                //이모티콘 존재 여부 확인
+                if (em_listBox.Items.Count == 0)
+                {
+                    //알림 뛰우기
+                    info_text = "설치된 이모티콘이 없어요. 이모티콘 업데이트를 눌러주세요";
+                    info_panel.BackColor = Color.Orange;
+                    infobox(sender, e);
+                }
+
                 //열기
                 em_panel_isopen = true;
 
@@ -1972,6 +2083,8 @@ namespace goUP_Brain
 
                 em_bt.BackColor = Color.DodgerBlue;
                 em_bt.ForeColor = Color.White;
+
+                em_listBox.SelectedIndex = 0;
             }
             else
             {
@@ -1985,60 +2098,6 @@ namespace goUP_Brain
             }
         }
 
-        private void em_1_Click(object sender, EventArgs e)
-        {
-            // 현재 텍스트박스의 커서 위치를 가져옵니다.
-            int cursorPosition = textBox.SelectionStart;
-
-            // 특정 텍스트를 가져옵니다.
-            string textToInsert = "{::emoticon-1::}";
-
-            // 현재 텍스트박스의 텍스트를 가져옵니다.
-            string currentText = textBox.Text;
-
-            // 커서 위치에 특정 텍스트를 삽입합니다.
-            string newText = currentText.Substring(0, cursorPosition) + textToInsert + currentText.Substring(cursorPosition);
-
-            // 텍스트박스에 새로운 텍스트를 설정합니다.
-            textBox.Text = newText;
-
-            // 커서 위치를 설정합니다. (삽입된 텍스트 끝으로 이동)
-            textBox.SelectionStart = cursorPosition + textToInsert.Length;
-
-            // 이모티콘 창 닫기
-            em_bt_Click(sender, e);
-
-            // 포커스를 텍스트박스로 이동합니다.
-            textBox.Focus();
-        }
-
-        private void em_2_Click(object sender, EventArgs e)
-        {
-            // 현재 텍스트박스의 커서 위치를 가져옵니다.
-            int cursorPosition = textBox.SelectionStart;
-
-            // 특정 텍스트를 가져옵니다.
-            string textToInsert = "{::emoticon-2::}";
-
-            // 현재 텍스트박스의 텍스트를 가져옵니다.
-            string currentText = textBox.Text;
-
-            // 커서 위치에 특정 텍스트를 삽입합니다.
-            string newText = currentText.Substring(0, cursorPosition) + textToInsert + currentText.Substring(cursorPosition);
-
-            // 텍스트박스에 새로운 텍스트를 설정합니다.
-            textBox.Text = newText;
-
-            // 커서 위치를 설정합니다. (삽입된 텍스트 끝으로 이동)
-            textBox.SelectionStart = cursorPosition + textToInsert.Length;
-
-            // 이모티콘 창 닫기
-            em_bt_Click(sender, e);
-
-            // 포커스를 텍스트박스로 이동합니다.
-            textBox.Focus();
-        }
-
         bool devmode = false;
 
         private void devmode_bt_Click(object sender, EventArgs e)
@@ -2047,7 +2106,7 @@ namespace goUP_Brain
             {
                 devmode = false;
                 devmode_bt.Text = "⚙️ 개발자 모드";
-                devmode_bt.BackColor = Color.White;
+                devmode_bt.BackColor = Color.WhiteSmoke;
                 devmode_bt.ForeColor = Color.Black;
                 textBox.BackColor = Color.White;
                 textBox.ForeColor = Color.Black;
@@ -2063,6 +2122,90 @@ namespace goUP_Brain
 
                 MessageBox.Show("개발자 모드가 켜졌어요\r\n개발자 모드의 기능을 사용하려면 아래처럼 하면 돼요\r\n1. 코드를 시냅스에 적어주세요\r\n2. [마크다운 모드로 전환하기]를 클릭해주세요\r\n3. 마크다운 모드 대신 웹페이지가 열려요\r\n\r\n⚠️ 주의\r\n라이브 미리보기는 Internet Explorer 모드에서 실행돼요\r\n실제 유저가 보는 환경과 다르게 표시될수 있어요\r\n또한 단일 HTML, CSS 코드만 지원해요\r\nJS, NextJS같은 스크립트 실행이 불가능해요");
             }
+        }
+
+        private void emupdate_bt_Click(object sender, EventArgs e)
+        {
+            em_listBox.Items.Clear();
+
+            string url = "https://files.goup.ggm.kr/em/em.goup"; // 다운로드할 파일의 URL을 입력하세요
+            string savePath = @"C:\goUP\BrainApp\em.goup"; // 파일을 저장할 경로와 파일명을 입력하세요
+
+            WebClient client = new WebClient();
+
+            try
+            {
+                client.DownloadFile(url, savePath);
+
+                // StreamReader를 사용하여 파일을 엽니다.
+                using (StreamReader sr = new StreamReader(savePath))
+                {
+                    int index_em = 1;
+
+                    // 파일의 끝까지 한 줄씩 읽어오면서 리스트박스에 추가합니다.
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        em_listBox.Items.Add(line);
+                        client.DownloadFile("https://files.goup.ggm.kr/em/em_" + index_em + ".png", @"C:\goUP\BrainApp\em_" + index_em + ".png");
+                        index_em++;
+                    }
+                }
+
+                //알림 뛰우기
+                info_text = "이모티콘을 업데이트했어요";
+                info_panel.BackColor = Color.DodgerBlue;
+                infobox(sender, e);
+            }
+            catch (Exception ex)
+            {
+                //알림 뛰우기
+                info_text = "문제가 발생했어요";
+                info_panel.BackColor = Color.OrangeRed;
+                infobox(sender, e);
+
+                MessageBox.Show("이모티콘 업데이트중 문제가 발생했어요\r\n디스코드 서버에 문의글을 남기면 신속하게 해결해 드릴게요\r\n밑의 내용을 캡쳐해서 문의해 주세요\r\n\r\n" + ex.Message, "goUP Brain", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+            }
+        }
+
+        private void eminput_bt_Click(object sender, EventArgs e)
+        {
+            if (em_listBox.SelectedIndex != -1)
+            {
+                // 현재 텍스트박스의 커서 위치를 가져옵니다.
+                int cursorPosition = textBox.SelectionStart;
+
+                // 특정 텍스트를 가져옵니다.
+                string textToInsert = "{::emoticon-" + (em_listBox.SelectedIndex + 1).ToString() + "::}";
+
+                // 현재 텍스트박스의 텍스트를 가져옵니다.
+                string currentText = textBox.Text;
+
+                // 커서 위치에 특정 텍스트를 삽입합니다.
+                string newText = currentText.Substring(0, cursorPosition) + textToInsert + currentText.Substring(cursorPosition);
+
+                // 텍스트박스에 새로운 텍스트를 설정합니다.
+                textBox.Text = newText;
+
+                // 커서 위치를 설정합니다. (삽입된 텍스트 끝으로 이동)
+                textBox.SelectionStart = cursorPosition + textToInsert.Length;
+
+                // 이모티콘 창 닫기
+                em_bt_Click(sender, e);
+
+                // 포커스를 텍스트박스로 이동합니다.
+                textBox.Focus();
+            }
+        }
+
+        private void em_listBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            em_pictureBox.ImageLocation = $"C:\\goUP\\BrainApp\\em_{(em_listBox.SelectedIndex + 1)}.png";
+        }
+
+        private void main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            client.Dispose();
         }
     }
 }

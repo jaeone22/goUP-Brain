@@ -610,6 +610,11 @@ namespace goUP_Brain
             }
         }
 
+        private void checkBox_4_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
         Point mCurrentPosition = new Point(0, 0);
 
         private void title1_panel_MouseDown(object sender, MouseEventArgs e)
@@ -630,34 +635,39 @@ namespace goUP_Brain
 
         private void id_textBox_TextChanged(object sender, EventArgs e)
         {
-            /*if (id_textBox.Text.Contains("@duck.com"))
+            if (id_textBox.Text.Contains("@duck.com"))
             {
-                id_label.Text = "✔️ | 안전해요";
+                id_label.Text = "이메일 | ✔️ 안전해요";
             }
             else if (id_textBox.Text.Contains("@protonmail.com"))
             {
-                id_label.Text = "✔️ | 안전해요";
+                id_label.Text = "이메일 | ✔️ 안전해요";
             }
             else if (id_textBox.Text.Contains("@proton.me"))
             {
-                id_label.Text = "✔️ | 안전해요";
+                id_label.Text = "이메일 | ✔️ 안전해요";
             }
             else if (id_textBox.Text.Contains("@icloud.com"))
             {
-                id_label.Text = "✔️ | 안전해요";
+                id_label.Text = "이메일 | ✔️ 안전해요";
             }
             else if (id_textBox.Text.Contains("@naver.com"))
             {
-                id_label.Text = "⚠️ | 데이터를 암호화하지 않아요";
+                //id_label.Text = "이메일 | ⚠️ 알 수 없어요";
             }
             else if (id_textBox.Text.Contains("@gmail.com"))
             {
-                id_label.Text = "⚠️ | 개인정보 추적 사례가 있어요";
+                //id_label.Text = "이메일 | ⚠️ 알 수 없어요";
+            }
+            else if (id_textBox.Text == "")
+            {
+                id_label.Text = "이메일";
             }
             else
             {
-                id_label.Text = "❔| 이메일 호스트를 알수 없어요";
-            }*/
+                id_label.Text = "이메일";
+            }
+
         }
 
         private void tos_bt_Click(object sender, EventArgs e)

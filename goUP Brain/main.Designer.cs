@@ -48,6 +48,7 @@ namespace goUP_Brain
             this.fastmemo_bt = new System.Windows.Forms.Button();
             this.cloudedit_save_bt = new System.Windows.Forms.Button();
             this.title_textBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.title2_panel = new System.Windows.Forms.Panel();
             this.goupid_bt = new System.Windows.Forms.Button();
             this.close_bt = new System.Windows.Forms.Button();
@@ -71,6 +72,7 @@ namespace goUP_Brain
             this.beta_info_close_label = new System.Windows.Forms.Label();
             this.beta_info_label = new System.Windows.Forms.Label();
             this.etc_panel = new System.Windows.Forms.Panel();
+            this.devmode_bt = new System.Windows.Forms.Button();
             this.restore_trash_bt = new System.Windows.Forms.Button();
             this.open_trash_bt = new System.Windows.Forms.Button();
             this.open_folder_bt = new System.Windows.Forms.Button();
@@ -81,10 +83,10 @@ namespace goUP_Brain
             this.title1_cloudedit_bt = new System.Windows.Forms.Label();
             this.cloudedit_listBox = new System.Windows.Forms.ListBox();
             this.em_panel = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.em_2 = new System.Windows.Forms.PictureBox();
-            this.em_1 = new System.Windows.Forms.PictureBox();
-            this.devmode_bt = new System.Windows.Forms.Button();
+            this.em_pictureBox = new System.Windows.Forms.PictureBox();
+            this.eminput_bt = new System.Windows.Forms.Button();
+            this.em_listBox = new System.Windows.Forms.ListBox();
+            this.emupdate_bt = new System.Windows.Forms.Button();
             this.title1_panel.SuspendLayout();
             this.text_panel.SuspendLayout();
             this.title2_panel.SuspendLayout();
@@ -95,8 +97,7 @@ namespace goUP_Brain
             this.etc_panel.SuspendLayout();
             this.cloudedit_title_panel.SuspendLayout();
             this.em_panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.em_2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.em_1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.em_pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // title1_panel
@@ -266,7 +267,7 @@ namespace goUP_Brain
             this.textBox.Name = "textBox";
             this.textBox.Size = new System.Drawing.Size(530, 460);
             this.textBox.TabIndex = 7;
-            this.textBox.Text = "여기에 메모를 입력해서 시냅스를 빠르게 만들수 있어요\r\n마크다운 문법과 HTML 문법, 일부 CSS 코드를 지원해요";
+            this.textBox.Text = "여기에 메모를 입력해서 시냅스를 빠르게 만들수 있어요\r\n마크다운 문법과 HTML 태그, goUP 편집기 문법을 지원해요";
             this.textBox.TextChanged += new System.EventHandler(this.richTextBox_TextChanged);
             this.textBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.textBox_MouseDown);
             // 
@@ -376,6 +377,17 @@ namespace goUP_Brain
             this.title_textBox.TextChanged += new System.EventHandler(this.title_textBox_TextChanged);
             this.title_textBox.Enter += new System.EventHandler(this.title_textBox_Enter);
             this.title_textBox.Leave += new System.EventHandler(this.title_textBox_Leave);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.ForeColor = System.Drawing.Color.DarkGray;
+            this.label1.Location = new System.Drawing.Point(60, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(226, 30);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "이모티콘은 마크다운 모드에서 표시돼요\r\n편집 모드에선 {::emoticon::} 처럼 나와요";
             // 
             // title2_panel
             // 
@@ -654,6 +666,22 @@ namespace goUP_Brain
             this.etc_panel.TabIndex = 11;
             this.etc_panel.Visible = false;
             // 
+            // devmode_bt
+            // 
+            this.devmode_bt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.devmode_bt.FlatAppearance.BorderSize = 0;
+            this.devmode_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.devmode_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.devmode_bt.Location = new System.Drawing.Point(0, 0);
+            this.devmode_bt.Name = "devmode_bt";
+            this.devmode_bt.Size = new System.Drawing.Size(200, 30);
+            this.devmode_bt.TabIndex = 7;
+            this.devmode_bt.Text = "⚙️ 개발자 모드";
+            this.devmode_bt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.devmode_bt.UseVisualStyleBackColor = false;
+            this.devmode_bt.Click += new System.EventHandler(this.devmode_bt_Click);
+            // 
             // restore_trash_bt
             // 
             this.restore_trash_bt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -788,62 +816,66 @@ namespace goUP_Brain
             // em_panel
             // 
             this.em_panel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.em_panel.Controls.Add(this.em_pictureBox);
+            this.em_panel.Controls.Add(this.eminput_bt);
+            this.em_panel.Controls.Add(this.em_listBox);
             this.em_panel.Controls.Add(this.label1);
-            this.em_panel.Controls.Add(this.em_2);
-            this.em_panel.Controls.Add(this.em_1);
-            this.em_panel.Location = new System.Drawing.Point(500, 300);
+            this.em_panel.Controls.Add(this.emupdate_bt);
+            this.em_panel.Location = new System.Drawing.Point(480, 220);
             this.em_panel.Name = "em_panel";
-            this.em_panel.Size = new System.Drawing.Size(300, 270);
+            this.em_panel.Size = new System.Drawing.Size(300, 350);
             this.em_panel.TabIndex = 12;
             this.em_panel.Visible = false;
             // 
-            // label1
+            // em_pictureBox
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.Location = new System.Drawing.Point(10, 215);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(262, 45);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "인터넷에 연결된 상태에서 마크다운모드일\r\n경우에만 이모티콘을 볼수 있어요\r\n편집 모드에서는 {::emoticon-0::} 처럼 표시돼요";
+            this.em_pictureBox.Location = new System.Drawing.Point(15, 15);
+            this.em_pictureBox.Name = "em_pictureBox";
+            this.em_pictureBox.Size = new System.Drawing.Size(40, 40);
+            this.em_pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.em_pictureBox.TabIndex = 16;
+            this.em_pictureBox.TabStop = false;
             // 
-            // em_2
+            // eminput_bt
             // 
-            this.em_2.BackgroundImage = global::goUP_Brain.Properties.Resources.em_2;
-            this.em_2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.em_2.Location = new System.Drawing.Point(160, 20);
-            this.em_2.Name = "em_2";
-            this.em_2.Size = new System.Drawing.Size(120, 120);
-            this.em_2.TabIndex = 1;
-            this.em_2.TabStop = false;
-            this.em_2.Click += new System.EventHandler(this.em_2_Click);
+            this.eminput_bt.BackColor = System.Drawing.Color.DodgerBlue;
+            this.eminput_bt.FlatAppearance.BorderSize = 0;
+            this.eminput_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.eminput_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.eminput_bt.ForeColor = System.Drawing.Color.White;
+            this.eminput_bt.Location = new System.Drawing.Point(185, 295);
+            this.eminput_bt.Name = "eminput_bt";
+            this.eminput_bt.Size = new System.Drawing.Size(100, 40);
+            this.eminput_bt.TabIndex = 15;
+            this.eminput_bt.Text = "삽입";
+            this.eminput_bt.UseVisualStyleBackColor = false;
+            this.eminput_bt.Click += new System.EventHandler(this.eminput_bt_Click);
             // 
-            // em_1
+            // em_listBox
             // 
-            this.em_1.BackgroundImage = global::goUP_Brain.Properties.Resources.em_1;
-            this.em_1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.em_1.Location = new System.Drawing.Point(20, 20);
-            this.em_1.Name = "em_1";
-            this.em_1.Size = new System.Drawing.Size(120, 120);
-            this.em_1.TabIndex = 0;
-            this.em_1.TabStop = false;
-            this.em_1.Click += new System.EventHandler(this.em_1_Click);
+            this.em_listBox.BackColor = System.Drawing.Color.White;
+            this.em_listBox.ForeColor = System.Drawing.Color.Black;
+            this.em_listBox.FormattingEnabled = true;
+            this.em_listBox.ItemHeight = 21;
+            this.em_listBox.Location = new System.Drawing.Point(15, 67);
+            this.em_listBox.Name = "em_listBox";
+            this.em_listBox.Size = new System.Drawing.Size(270, 214);
+            this.em_listBox.TabIndex = 14;
+            this.em_listBox.SelectedIndexChanged += new System.EventHandler(this.em_listBox_SelectedIndexChanged);
             // 
-            // devmode_bt
+            // emupdate_bt
             // 
-            this.devmode_bt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.devmode_bt.FlatAppearance.BorderSize = 0;
-            this.devmode_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.devmode_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.devmode_bt.Location = new System.Drawing.Point(0, 0);
-            this.devmode_bt.Name = "devmode_bt";
-            this.devmode_bt.Size = new System.Drawing.Size(200, 30);
-            this.devmode_bt.TabIndex = 7;
-            this.devmode_bt.Text = "⚙️ 개발자 모드";
-            this.devmode_bt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.devmode_bt.UseVisualStyleBackColor = false;
-            this.devmode_bt.Click += new System.EventHandler(this.devmode_bt_Click);
+            this.emupdate_bt.FlatAppearance.BorderSize = 0;
+            this.emupdate_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.emupdate_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.emupdate_bt.ForeColor = System.Drawing.Color.Black;
+            this.emupdate_bt.Location = new System.Drawing.Point(15, 295);
+            this.emupdate_bt.Name = "emupdate_bt";
+            this.emupdate_bt.Size = new System.Drawing.Size(155, 40);
+            this.emupdate_bt.TabIndex = 13;
+            this.emupdate_bt.Text = "업데이트";
+            this.emupdate_bt.UseVisualStyleBackColor = false;
+            this.emupdate_bt.Click += new System.EventHandler(this.emupdate_bt_Click);
             // 
             // main
             // 
@@ -871,6 +903,7 @@ namespace goUP_Brain
             this.Name = "main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "goUP Brain";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.main_FormClosing);
             this.Load += new System.EventHandler(this.main_Load);
             this.Shown += new System.EventHandler(this.main_Shown);
             this.title1_panel.ResumeLayout(false);
@@ -892,8 +925,7 @@ namespace goUP_Brain
             this.cloudedit_title_panel.PerformLayout();
             this.em_panel.ResumeLayout(false);
             this.em_panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.em_2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.em_1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.em_pictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -951,9 +983,11 @@ namespace goUP_Brain
         private System.Windows.Forms.Label syname_label;
         private System.Windows.Forms.Button em_bt;
         private System.Windows.Forms.Panel em_panel;
-        private System.Windows.Forms.PictureBox em_2;
-        private System.Windows.Forms.PictureBox em_1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button devmode_bt;
+        private System.Windows.Forms.Button emupdate_bt;
+        private System.Windows.Forms.Button eminput_bt;
+        private System.Windows.Forms.ListBox em_listBox;
+        private System.Windows.Forms.PictureBox em_pictureBox;
     }
 }
