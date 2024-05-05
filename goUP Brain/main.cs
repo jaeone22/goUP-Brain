@@ -38,10 +38,13 @@ namespace goUP_Brain
             round(sender, e);
 
             //디스코드
-            discord_start();
+            if (Properties.Settings.Default.link_discord == true)
+            {
+                discord_start();
+            }
 
             //버전
-            beta_info_label.Text = "⚠️ Beta | " + Properties.app.Default.version;
+            beta_info_label.Text = "⚠️ goUP Brain " + Properties.app.Default.version;
 
             //베타
             if (Properties.app.Default.is_beta == true)
@@ -1371,6 +1374,26 @@ namespace goUP_Brain
             f.ShowDialog();
 
             reload(sender, e);
+
+            try
+            {
+                client.Dispose();
+            }
+            catch { }
+
+            // 연동 설정
+            if (Properties.Settings.Default.link_discord == true)
+            {
+                discord_start();
+            }
+            else
+            {
+                try
+                {
+                    client.Dispose();
+                }
+                catch { }
+            }
 
             //this.Show();
         }

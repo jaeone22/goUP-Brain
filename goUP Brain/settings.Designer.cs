@@ -218,7 +218,7 @@
             this.editdata_menu_open_bt.Name = "editdata_menu_open_bt";
             this.editdata_menu_open_bt.Size = new System.Drawing.Size(230, 40);
             this.editdata_menu_open_bt.TabIndex = 12;
-            this.editdata_menu_open_bt.Text = " 📂 데이터 관리";
+            this.editdata_menu_open_bt.Text = " 🔗 연결 및 연동";
             this.editdata_menu_open_bt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.editdata_menu_open_bt.UseVisualStyleBackColor = false;
             this.editdata_menu_open_bt.Click += new System.EventHandler(this.editdata_menu_open_bt_Click);
@@ -476,8 +476,10 @@
             this.restore_editdata_menu_panel.Name = "restore_editdata_menu_panel";
             this.restore_editdata_menu_panel.Size = new System.Drawing.Size(250, 50);
             this.restore_editdata_menu_panel.TabIndex = 17;
-            this.restore_editdata_menu_panel.Text = "🛠️ 시냅스 복구";
+            this.restore_editdata_menu_panel.Text = " ❌ 알 수 없는 서비스";
+            this.restore_editdata_menu_panel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.restore_editdata_menu_panel.UseVisualStyleBackColor = false;
+            this.restore_editdata_menu_panel.Visible = false;
             this.restore_editdata_menu_panel.Click += new System.EventHandler(this.restore_editdata_menu_panel_Click);
             // 
             // restoretrash_editdata_menu_panel
@@ -492,8 +494,10 @@
             this.restoretrash_editdata_menu_panel.Name = "restoretrash_editdata_menu_panel";
             this.restoretrash_editdata_menu_panel.Size = new System.Drawing.Size(250, 50);
             this.restoretrash_editdata_menu_panel.TabIndex = 16;
-            this.restoretrash_editdata_menu_panel.Text = "🗑️ 시냅스 복원";
+            this.restoretrash_editdata_menu_panel.Text = " ❌ 알 수 없는 서비스";
+            this.restoretrash_editdata_menu_panel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.restoretrash_editdata_menu_panel.UseVisualStyleBackColor = false;
+            this.restoretrash_editdata_menu_panel.Visible = false;
             this.restoretrash_editdata_menu_panel.Click += new System.EventHandler(this.restoretrash_editdata_menu_panel_Click);
             // 
             // opentrash_editdata_menu_panel
@@ -508,7 +512,8 @@
             this.opentrash_editdata_menu_panel.Name = "opentrash_editdata_menu_panel";
             this.opentrash_editdata_menu_panel.Size = new System.Drawing.Size(250, 50);
             this.opentrash_editdata_menu_panel.TabIndex = 15;
-            this.opentrash_editdata_menu_panel.Text = "🗑️ 휴지통 열기";
+            this.opentrash_editdata_menu_panel.Text = " ✔️ Discord";
+            this.opentrash_editdata_menu_panel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.opentrash_editdata_menu_panel.UseVisualStyleBackColor = false;
             this.opentrash_editdata_menu_panel.Click += new System.EventHandler(this.opentrash_editdata_menu_panel_Click);
             // 
@@ -524,7 +529,8 @@
             this.openfolder_editdata_menu_panel.Name = "openfolder_editdata_menu_panel";
             this.openfolder_editdata_menu_panel.Size = new System.Drawing.Size(250, 50);
             this.openfolder_editdata_menu_panel.TabIndex = 14;
-            this.openfolder_editdata_menu_panel.Text = "📂 폴더 열기";
+            this.openfolder_editdata_menu_panel.Text = " ❔ goUP Start";
+            this.openfolder_editdata_menu_panel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.openfolder_editdata_menu_panel.UseVisualStyleBackColor = false;
             this.openfolder_editdata_menu_panel.Click += new System.EventHandler(this.openfolder_editdata_menu_panel_Click);
             // 
@@ -534,9 +540,9 @@
             this.label_editdata_menu_panel.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label_editdata_menu_panel.Location = new System.Drawing.Point(83, 80);
             this.label_editdata_menu_panel.Name = "label_editdata_menu_panel";
-            this.label_editdata_menu_panel.Size = new System.Drawing.Size(290, 21);
+            this.label_editdata_menu_panel.Size = new System.Drawing.Size(412, 21);
             this.label_editdata_menu_panel.TabIndex = 8;
-            this.label_editdata_menu_panel.Text = "여기서 모든 데이터를 관리할수 있어요";
+            this.label_editdata_menu_panel.Text = "다른 goUP 서비스 또는 외부 서비스와 연결할수 있어요";
             // 
             // pictureBox_editdata_menu_panel
             // 
@@ -554,9 +560,9 @@
             this.title_editdata_menu_panel.Font = new System.Drawing.Font("맑은 고딕", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.title_editdata_menu_panel.Location = new System.Drawing.Point(80, 25);
             this.title_editdata_menu_panel.Name = "title_editdata_menu_panel";
-            this.title_editdata_menu_panel.Size = new System.Drawing.Size(172, 40);
+            this.title_editdata_menu_panel.Size = new System.Drawing.Size(182, 40);
             this.title_editdata_menu_panel.TabIndex = 6;
-            this.title_editdata_menu_panel.Text = "데이터 관리";
+            this.title_editdata_menu_panel.Text = "연결 및 연동";
             // 
             // restore_menu_panel
             // 
