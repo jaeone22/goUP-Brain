@@ -41,7 +41,7 @@ namespace goUP_Brain
             discord_start();
 
             //버전
-            beta_info_label.Text = "⚠️ Beta | goUP Brain " + Properties.app.Default.version;
+            beta_info_label.Text = "⚠️ Beta | " + Properties.app.Default.version;
 
             //베타
             if (Properties.app.Default.is_beta == true)
@@ -131,6 +131,14 @@ namespace goUP_Brain
 
             ApplyRoundCorners(info_panel, ro1);
             ApplyRoundCorners(infoclose_bt, ro2);
+
+            ApplyRoundCorners(etc_panel, ro2);
+
+            ApplyRoundCorners(em_panel, ro2);
+            ApplyRoundCorners(em_listBox, ro2);
+            ApplyRoundCorners(em_pictureBox, ro2);
+            ApplyRoundCorners(eminput_bt, ro2);
+            ApplyRoundCorners(emupdate_bt, ro2);
         }
 
         private void ApplyRoundCorners(Control control, int cornerRadius)
@@ -330,6 +338,15 @@ namespace goUP_Brain
 
         private void richTextBox_TextChanged(object sender, EventArgs e)
         {
+            // 텍스트가 변경될 때마다 수직 및 수평 스크롤바를 표시합니다.
+            bool showHorizontalScrollBar = textBox.ClientSize.Width < textBox.GetPreferredSize(new System.Drawing.Size(0, textBox.ClientSize.Height)).Width;
+            bool showVerticalScrollBar = textBox.ClientSize.Height < textBox.GetPreferredSize(new System.Drawing.Size(textBox.ClientSize.Width, 0)).Height;
+
+            textBox.ScrollBars = (showHorizontalScrollBar && showVerticalScrollBar) ? ScrollBars.Both :
+                                   (showHorizontalScrollBar) ? ScrollBars.Horizontal :
+                                   (showVerticalScrollBar) ? ScrollBars.Vertical :
+                                   ScrollBars.None;
+
             if (listBox.SelectedItem == null)
             {
                 if (goupid_title1_panel.Visible == false && cloudedit_title_panel.Visible == false)
@@ -1261,6 +1278,14 @@ namespace goUP_Brain
                 etc_bt.Text = "▼";
                 etc_bt.BackColor = Color.DodgerBlue;
                 etc_bt.ForeColor = Color.White;
+
+                //닫기
+                em_panel_isopen = false;
+
+                em_panel.Visible = false;
+
+                em_bt.BackColor = Color.FromArgb(250, 250, 250);
+                em_bt.ForeColor = Color.Black;
             }
             else
             {
@@ -2084,7 +2109,19 @@ namespace goUP_Brain
                 em_bt.BackColor = Color.DodgerBlue;
                 em_bt.ForeColor = Color.White;
 
-                em_listBox.SelectedIndex = 0;
+                if (em_listBox.Items.Count != 0)
+                {
+                    em_listBox.SelectedIndex = 0;
+                }
+
+                //닫기
+                etc_menu_isopen = false;
+
+                etc_panel.Visible = false;
+
+                etc_bt.Text = "▲";
+                etc_bt.BackColor = Color.FromArgb(250, 250, 250);
+                etc_bt.ForeColor = Color.Black;
             }
             else
             {

@@ -219,7 +219,8 @@ namespace goUP_Brain
                                         Properties.Settings.Default.autologin = true;
                                         Properties.Settings.Default.Save();
 
-                                        goupid_Shown(sender, e);
+                                        //goupid_Shown(sender, e);
+                                        this.Close();
                                     }
                                     else if (result == "error_pw")
                                     {
@@ -599,7 +600,7 @@ namespace goUP_Brain
             {
                 checkBox_3.ForeColor = Color.Black;
 
-                if (MessageBox.Show("goUP ID 마케팅 및 광고성 정보 수신 동의서를 열까요?", "goUP ID", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                if (MessageBox.Show("goUP ID 이메일 수신 동의서를 열까요?", "goUP ID", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                 {
                     Process.Start("https://plip.kr/pcc/216a3b33-836d-4bd3-9990-bad4bb1e091f/consent/1.html");
                 }
@@ -612,7 +613,19 @@ namespace goUP_Brain
 
         private void checkBox_4_CheckedChanged(object sender, EventArgs e)
         {
+            if (checkBox_4.Checked == true)
+            {
+                checkBox_4.ForeColor = Color.Black;
 
+                if (MessageBox.Show("정말로 만 14세 이상인가요?\r\n아직 만 14세 미만은 goUP ID 이용이 불가능해요", "goUP ID", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.No)
+                {
+                    checkBox_4.Checked = false;
+                }
+            }
+            else
+            {
+                checkBox_4.ForeColor = Color.Red;
+            }
         }
 
         Point mCurrentPosition = new Point(0, 0);

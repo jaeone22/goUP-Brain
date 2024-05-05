@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(goupid));
             this.login_panel = new System.Windows.Forms.Panel();
+            this.checkBox_4 = new System.Windows.Forms.CheckBox();
             this.tos_bt = new System.Windows.Forms.Button();
             this.pw_panel = new System.Windows.Forms.Panel();
             this.pw_textBox = new System.Windows.Forms.TextBox();
@@ -59,7 +60,6 @@
             this.changepw_bt = new System.Windows.Forms.Button();
             this.logout_bt = new System.Windows.Forms.Button();
             this.idinfo_label = new System.Windows.Forms.Label();
-            this.checkBox_4 = new System.Windows.Forms.CheckBox();
             this.login_panel.SuspendLayout();
             this.pw_panel.SuspendLayout();
             this.id_panel.SuspendLayout();
@@ -88,6 +88,18 @@
             this.login_panel.Size = new System.Drawing.Size(400, 430);
             this.login_panel.TabIndex = 0;
             this.login_panel.Visible = false;
+            // 
+            // checkBox_4
+            // 
+            this.checkBox_4.AutoSize = true;
+            this.checkBox_4.ForeColor = System.Drawing.Color.Red;
+            this.checkBox_4.Location = new System.Drawing.Point(20, 320);
+            this.checkBox_4.Name = "checkBox_4";
+            this.checkBox_4.Size = new System.Drawing.Size(171, 25);
+            this.checkBox_4.TabIndex = 8;
+            this.checkBox_4.Text = "만 14세 이상이에요";
+            this.checkBox_4.UseVisualStyleBackColor = true;
+            this.checkBox_4.CheckedChanged += new System.EventHandler(this.checkBox_4_CheckedChanged);
             // 
             // tos_bt
             // 
@@ -182,9 +194,9 @@
             this.checkBox_3.ForeColor = System.Drawing.Color.Red;
             this.checkBox_3.Location = new System.Drawing.Point(20, 290);
             this.checkBox_3.Name = "checkBox_3";
-            this.checkBox_3.Size = new System.Drawing.Size(315, 25);
+            this.checkBox_3.Size = new System.Drawing.Size(239, 25);
             this.checkBox_3.TabIndex = 5;
-            this.checkBox_3.Text = "마케팅 및 광고성 정보 수신에 동의해요";
+            this.checkBox_3.Text = "중요 이메일 수신에 동의해요";
             this.checkBox_3.UseVisualStyleBackColor = true;
             this.checkBox_3.CheckedChanged += new System.EventHandler(this.checkBox_3_CheckedChanged);
             // 
@@ -415,18 +427,6 @@
             this.idinfo_label.Size = new System.Drawing.Size(264, 32);
             this.idinfo_label.TabIndex = 0;
             this.idinfo_label.Text = "계정 토큰 불러오는중...";
-            // 
-            // checkBox_4
-            // 
-            this.checkBox_4.AutoSize = true;
-            this.checkBox_4.ForeColor = System.Drawing.Color.Red;
-            this.checkBox_4.Location = new System.Drawing.Point(20, 320);
-            this.checkBox_4.Name = "checkBox_4";
-            this.checkBox_4.Size = new System.Drawing.Size(171, 25);
-            this.checkBox_4.TabIndex = 8;
-            this.checkBox_4.Text = "만 14세 이상이에요";
-            this.checkBox_4.UseVisualStyleBackColor = true;
-            this.checkBox_4.CheckedChanged += new System.EventHandler(this.checkBox_4_CheckedChanged);
             // 
             // goupid
             // 
