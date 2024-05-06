@@ -70,10 +70,9 @@ namespace goUP_Brain
         {
             if (Properties.Settings.Default.autologin == true)
             {
-                this.Hide();
                 goupid f = new goupid("auto_login");
                 f.ShowDialog();
-                this.Show();
+                open_cloudedit_bt_Click(null, EventArgs.Empty);
             }
         }
 
@@ -570,6 +569,7 @@ namespace goUP_Brain
 
                         this.Size = new Size(800, 600);
                         minimode_panel.Visible = false;
+                        this.TopMost = false;
                         round();
                     }
 
@@ -584,8 +584,9 @@ namespace goUP_Brain
                     {
                         minimode = true;
 
-                        golocal_bt_Click(sender, e);
-                        this.Size = new Size(250, 80);
+                        //golocal_bt_Click(sender, e);
+                        this.Size = new Size(250, 40);
+                        this.TopMost = true;
                         minimode_panel.Visible = true;
                         round();
                     }
@@ -613,10 +614,9 @@ namespace goUP_Brain
 
         private void goupid_bt_Click(object sender, EventArgs e)
         {
-            this.Hide();
             goupid f = new goupid("");
             f.ShowDialog();
-            this.Show();
+            goupid_ck();
         }
 
         bool if_readmode = true;
