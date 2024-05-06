@@ -12,7 +12,7 @@ namespace goUP_Brain.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -61,13 +61,13 @@ namespace goUP_Brain.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool please_stop_hacking {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool link_discord {
             get {
-                return ((bool)(this["please_stop_hacking"]));
+                return ((bool)(this["link_discord"]));
             }
             set {
-                this["please_stop_hacking"] = value;
+                this["link_discord"] = value;
             }
         }
     }

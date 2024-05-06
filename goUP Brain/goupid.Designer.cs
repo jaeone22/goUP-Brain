@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(goupid));
             this.login_panel = new System.Windows.Forms.Panel();
+            this.checkBox_4 = new System.Windows.Forms.CheckBox();
             this.tos_bt = new System.Windows.Forms.Button();
             this.pw_panel = new System.Windows.Forms.Panel();
             this.pw_textBox = new System.Windows.Forms.TextBox();
@@ -71,6 +72,7 @@
             // login_panel
             // 
             this.login_panel.BackColor = System.Drawing.Color.White;
+            this.login_panel.Controls.Add(this.checkBox_4);
             this.login_panel.Controls.Add(this.tos_bt);
             this.login_panel.Controls.Add(this.pw_panel);
             this.login_panel.Controls.Add(this.id_panel);
@@ -87,18 +89,30 @@
             this.login_panel.TabIndex = 0;
             this.login_panel.Visible = false;
             // 
+            // checkBox_4
+            // 
+            this.checkBox_4.AutoSize = true;
+            this.checkBox_4.ForeColor = System.Drawing.Color.Red;
+            this.checkBox_4.Location = new System.Drawing.Point(20, 320);
+            this.checkBox_4.Name = "checkBox_4";
+            this.checkBox_4.Size = new System.Drawing.Size(171, 25);
+            this.checkBox_4.TabIndex = 8;
+            this.checkBox_4.Text = "만 14세 이상이에요";
+            this.checkBox_4.UseVisualStyleBackColor = true;
+            this.checkBox_4.CheckedChanged += new System.EventHandler(this.checkBox_4_CheckedChanged);
+            // 
             // tos_bt
             // 
             this.tos_bt.BackColor = System.Drawing.Color.White;
             this.tos_bt.FlatAppearance.BorderSize = 0;
             this.tos_bt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.tos_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.tos_bt.ForeColor = System.Drawing.Color.Black;
-            this.tos_bt.Location = new System.Drawing.Point(20, 315);
+            this.tos_bt.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tos_bt.ForeColor = System.Drawing.Color.DarkGray;
+            this.tos_bt.Location = new System.Drawing.Point(240, 12);
             this.tos_bt.Name = "tos_bt";
-            this.tos_bt.Size = new System.Drawing.Size(360, 36);
+            this.tos_bt.Size = new System.Drawing.Size(150, 40);
             this.tos_bt.TabIndex = 6;
-            this.tos_bt.Text = "개인정보처리방침 보기";
+            this.tos_bt.Text = "개인정보처리방침";
             this.tos_bt.UseVisualStyleBackColor = false;
             this.tos_bt.Click += new System.EventHandler(this.tos_bt_Click);
             // 
@@ -106,7 +120,7 @@
             // 
             this.pw_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.pw_panel.Controls.Add(this.pw_textBox);
-            this.pw_panel.Location = new System.Drawing.Point(20, 175);
+            this.pw_panel.Location = new System.Drawing.Point(20, 180);
             this.pw_panel.Name = "pw_panel";
             this.pw_panel.Size = new System.Drawing.Size(360, 40);
             this.pw_panel.TabIndex = 0;
@@ -130,7 +144,7 @@
             // 
             this.id_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.id_panel.Controls.Add(this.id_textBox);
-            this.id_panel.Location = new System.Drawing.Point(20, 95);
+            this.id_panel.Location = new System.Drawing.Point(20, 100);
             this.id_panel.Name = "id_panel";
             this.id_panel.Size = new System.Drawing.Size(360, 40);
             this.id_panel.TabIndex = 0;
@@ -154,7 +168,7 @@
             // 
             this.checkBox_2.AutoSize = true;
             this.checkBox_2.ForeColor = System.Drawing.Color.Red;
-            this.checkBox_2.Location = new System.Drawing.Point(20, 256);
+            this.checkBox_2.Location = new System.Drawing.Point(20, 260);
             this.checkBox_2.Name = "checkBox_2";
             this.checkBox_2.Size = new System.Drawing.Size(277, 25);
             this.checkBox_2.TabIndex = 4;
@@ -168,9 +182,9 @@
             this.checkBox_1.ForeColor = System.Drawing.Color.Red;
             this.checkBox_1.Location = new System.Drawing.Point(20, 230);
             this.checkBox_1.Name = "checkBox_1";
-            this.checkBox_1.Size = new System.Drawing.Size(290, 25);
+            this.checkBox_1.Size = new System.Drawing.Size(246, 25);
             this.checkBox_1.TabIndex = 3;
-            this.checkBox_1.Text = "goUP ID 이용약관 (ToS)에 동의해요";
+            this.checkBox_1.Text = "goUP ID 이용약관에 동의해요";
             this.checkBox_1.UseVisualStyleBackColor = true;
             this.checkBox_1.CheckedChanged += new System.EventHandler(this.checkBox_1_CheckedChanged);
             // 
@@ -178,11 +192,11 @@
             // 
             this.checkBox_3.AutoSize = true;
             this.checkBox_3.ForeColor = System.Drawing.Color.Red;
-            this.checkBox_3.Location = new System.Drawing.Point(20, 282);
+            this.checkBox_3.Location = new System.Drawing.Point(20, 290);
             this.checkBox_3.Name = "checkBox_3";
-            this.checkBox_3.Size = new System.Drawing.Size(315, 25);
+            this.checkBox_3.Size = new System.Drawing.Size(239, 25);
             this.checkBox_3.TabIndex = 5;
-            this.checkBox_3.Text = "마케팅 및 광고성 정보 수신에 동의해요";
+            this.checkBox_3.Text = "중요 이메일 수신에 동의해요";
             this.checkBox_3.UseVisualStyleBackColor = true;
             this.checkBox_3.CheckedChanged += new System.EventHandler(this.checkBox_3_CheckedChanged);
             // 
@@ -214,7 +228,7 @@
             // pw_label
             // 
             this.pw_label.AutoSize = true;
-            this.pw_label.Location = new System.Drawing.Point(15, 145);
+            this.pw_label.Location = new System.Drawing.Point(15, 150);
             this.pw_label.Name = "pw_label";
             this.pw_label.Size = new System.Drawing.Size(74, 21);
             this.pw_label.TabIndex = 0;
@@ -223,7 +237,7 @@
             // id_label
             // 
             this.id_label.AutoSize = true;
-            this.id_label.Location = new System.Drawing.Point(15, 65);
+            this.id_label.Location = new System.Drawing.Point(15, 70);
             this.id_label.Name = "id_label";
             this.id_label.Size = new System.Drawing.Size(58, 21);
             this.id_label.TabIndex = 0;
@@ -482,5 +496,6 @@
         private System.Windows.Forms.Label oldpw_label;
         private System.Windows.Forms.Button delid_bt;
         private System.Windows.Forms.Button tos_bt;
+        private System.Windows.Forms.CheckBox checkBox_4;
     }
 }

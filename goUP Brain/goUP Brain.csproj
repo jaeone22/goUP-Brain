@@ -39,6 +39,9 @@
     <ApplicationIcon>goUP_Brain.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DiscordRPC, Version=1.2.1.24, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DiscordRichPresence.1.2.1.24\lib\net45\DiscordRPC.dll</HintPath>
+    </Reference>
     <Reference Include="Markdig, Version=0.34.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Markdig.0.34.0\lib\net462\Markdig.dll</HintPath>
     </Reference>
@@ -174,6 +177,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="goUP_Brain.ico" />
+    <None Include="Resources\em.png" />
+    <None Include="Resources\em_2.png" />
+    <None Include="Resources\em_1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

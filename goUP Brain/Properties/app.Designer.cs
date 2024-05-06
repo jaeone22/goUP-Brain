@@ -25,7 +25,7 @@ namespace goUP_Brain.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2.1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2.2")]
         public string version {
             get {
                 return ((string)(this["version"]));
