@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="version" Type="System.String" Scope="User">
-      <Value Profile="(Default)">2.2 Beta 1</Value>
+      <Value Profile="(Default)">2.2</Value>
     </Setting>
     <Setting Name="is_beta" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="is_goupstore" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
