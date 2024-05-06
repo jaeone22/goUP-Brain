@@ -900,7 +900,6 @@ namespace goUP_Brain
             this.Text = "goUP Brain";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.main_FormClosing);
             this.Load += new System.EventHandler(this.main_Load);
-            this.Shown += new System.EventHandler(this.main_Shown);
             this.title1_panel.ResumeLayout(false);
             this.title1_panel.PerformLayout();
             this.text_panel.ResumeLayout(false);

@@ -10,7 +10,6 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
-using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -25,7 +24,11 @@ namespace goUP_Brain
         }
 
         //
+        public DiscordRpcClient client;
         Point mCurrentPosition = new Point(0, 0);
+        //
+
+        //
         string df = @"C:\goUP\Brain\";
         string info_text = "안녕하세요!";
 
@@ -35,15 +38,24 @@ namespace goUP_Brain
 
         private void main_Load(object sender, EventArgs e)
         {
-            //라운드 처리
-            round(sender, e);
+            round();
+            discord_start();
+            mkdir();
+            beta_ck();
+            reload();
+            goupid_ck();
+        }
 
-            //디스코드
-            if (Properties.Settings.Default.link_discord == true)
-            {
-                discord_start();
-            }
+        private void mkdir()
+        {
+            DirectoryInfo di = Directory.CreateDirectory(@"C:\goUP");
+            di = Directory.CreateDirectory(@"C:\goUP\Brain");
+            di = Directory.CreateDirectory(@"C:\goUP\Brain\.Trash");
+            di.Attributes = FileAttributes.Directory;
+        }
 
+        private void beta_ck()
+        {
             //버전
             beta_info_label.Text = "⚠️ goUP Brain " + Properties.app.Default.version;
 
@@ -52,68 +64,48 @@ namespace goUP_Brain
             {
                 beta_info_panel.Visible = true;
             }
+        }
 
-            //디렉토리 생성
-            DirectoryInfo di = Directory.CreateDirectory(@"C:\goUP");
-            di = Directory.CreateDirectory(@"C:\goUP\Brain");
-            di = Directory.CreateDirectory(@"C:\goUP\Brain\.Trash");
-            di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
-
-            //새로고침
-            reload(sender, e);
-
-            // 시냅스 선택
-            if (listBox.Items.Count != 0)
+        private void goupid_ck()
+        {
+            if (Properties.Settings.Default.autologin == true)
             {
-                listBox.SelectedIndex = 0;
+                this.Hide();
+                goupid f = new goupid("auto_login");
+                f.ShowDialog();
+                this.Show();
             }
         }
 
-        public DiscordRpcClient client;
-
         private void discord_start()
         {
-            client = new DiscordRpcClient("1227451314838175814");
-
-            //Set the logger
-            client.Logger = new ConsoleLogger() { Level = LogLevel.Warning };
-
-            //Subscribe to events
-            client.OnReady += (sender, e) =>
+            if (Properties.Settings.Default.link_discord == true)
             {
-                //MessageBox.Show("Received Ready from user {0}", e.User.Username);
-            };
+                client = new DiscordRpcClient("1227451314838175814");
+                client.Logger = new ConsoleLogger() { Level = LogLevel.Warning };
+                client.Initialize();
 
-            client.OnPresenceUpdate += (sender, e) =>
-            {
-                //MessageBox.Show("Received Update! {0}", e.Presence.ToString());
-            };
-
-            //Connect to the RPC
-            client.Initialize();
-
-            //Set the rich presence
-            //Call this as many times as you want and anywhere in your code.
-            client.SetPresence(new RichPresence()
-            {
-                Details = "시냅스 편집중",
-                //State = "시냅스 편집중",
-
-                Buttons = new DiscordRPC.Button[]
+                client.SetPresence(new RichPresence()
                 {
+                    Details = "시냅스 편집중",
+                    //State = "시냅스 편집중",
+
+                    Buttons = new DiscordRPC.Button[]
+                    {
                     new DiscordRPC.Button() { Label = "goUP Brain 다운로드", Url = "https://goup.ggm.kr/download" },
                     new DiscordRPC.Button() { Label = "더 알아보기", Url = "https://goup.ggm.kr/apps/goup-brain" }
-                },
+                    },
 
-                Assets = new Assets()
-                {
-                    LargeImageKey = "goup_brain",
-                    LargeImageText = "goUP Brain"
-                }
-            });
+                    Assets = new Assets()
+                    {
+                        LargeImageKey = "goup_brain",
+                        LargeImageText = "goUP Brain"
+                    }
+                });
+            }
         }
 
-        private void round(object sender, EventArgs e)
+        private void round()
         {
             //라운드 처리
             int ro1 = 50;
@@ -163,7 +155,7 @@ namespace goUP_Brain
             control.Region = new Region(path);
         }
 
-        private void reload(object sender, EventArgs e)
+        private void reload()
         {
             listBox.Items.Clear();
 
@@ -174,66 +166,18 @@ namespace goUP_Brain
                 listBox.Items.Add(file.Name.Replace(".goUP", ""));
             }
 
-            /*try
+            // 시냅스 선택
+            if (listBox.Items.Count != 0)
             {
-                using (StreamReader reader = new StreamReader(@"C:\goUP\theme.goup"))
-                {
-                    // 파일 내용을 변수에 읽어오기
-                    string theme = reader.ReadLine();
-
-                    // 파일 내용에 따라 테마 설정
-                    if (theme == "goup-ui")
-                    {
-                        title1_panel.BackColor = Color.WhiteSmoke;
-                        title2_panel.BackColor = Color.FromArgb(250, 250, 250);
-
-                        del_bt.BackColor = Color.White;
-                        add_bt.BackColor = Color.White;
-
-                        listBox.BackColor = Color.FromArgb(240, 240, 240);
-
-                        text_panel.BackColor = Color.White;
-                        textBox.BackColor = Color.White;
-                        title_textBox.BackColor = Color.White;
-                    }
-                    else if (theme == "win-xp")
-                    {
-                        title1_panel.BackColor = Color.Blue;
-                        title2_panel.BackColor = Color.RoyalBlue;
-
-                        del_bt.BackColor = Color.RoyalBlue;
-                        add_bt.BackColor = Color.RoyalBlue;
-
-                        listBox.BackColor = Color.CornflowerBlue;
-
-                        text_panel.BackColor = Color.Ivory;
-                        textBox.BackColor = Color.Ivory;
-                        title_textBox.BackColor = Color.Ivory;
-                    }
-                    else if (theme == "x-mas")
-                    {
-                        title1_panel.BackColor = Color.Red;
-                        title2_panel.BackColor = Color.Green;
-
-                        del_bt.BackColor = Color.Red;
-                        add_bt.BackColor = Color.Red;
-
-                        listBox.BackColor = Color.DarkRed;
-
-                        text_panel.BackColor = Color.Green;
-                        textBox.BackColor = Color.Green;
-                        title_textBox.BackColor = Color.Green;
-                    }
-                }
+                listBox.SelectedIndex = 0;
             }
-            catch { }*/
         }
 
         private void infobox(object sender, EventArgs e)
         {
             info_label.Text = info_text;
             info_panel.Size = new Size(info_label.Size.Width + 60, 50);
-            round(sender, e);
+            round();
             info_panel.Location = new Point(10, 600);
             info_open_timer.Enabled = true;
         }
@@ -252,7 +196,7 @@ namespace goUP_Brain
             writer.Close();
 
             //새로고침
-            reload(sender, e);
+            reload();
 
             listBox.SelectedItem = "새로운 시냅스 " + count;
         }
@@ -271,7 +215,7 @@ namespace goUP_Brain
                 File.Move(df + listBox.SelectedItem + ".goUP", df + @".Trash\" + listBox.SelectedItem + " (" + count + ")" + ".goUP");
 
                 //새로고침
-                reload(sender, e);
+                reload();
 
                 //알림 뛰우기
                 info_text = "시냅스를 휴지통으로 보냈어요";
@@ -409,7 +353,7 @@ namespace goUP_Brain
             File.WriteAllText(df + "새로운 시냅스 " + count + ".goUP", textBox.Text);
 
             //새로고침
-            reload(sender, e);
+            reload();
 
             listBox.SelectedItem = "새로운 시냅스 " + count;
         }
@@ -442,7 +386,7 @@ namespace goUP_Brain
                         File.Move(df + listBox.SelectedItem + ".goUP", df + title_textBox.Text + ".goUP");
 
                         //새로고침
-                        reload(sender, e);
+                        reload();
                         listBox.SelectedItem = title_textBox.Text;
 
                         //알림 뛰우기
@@ -626,7 +570,7 @@ namespace goUP_Brain
 
                         this.Size = new Size(800, 600);
                         minimode_panel.Visible = false;
-                        round(sender, e);
+                        round();
                     }
 
                     this.Location = new Point(this.Location.X + (mCurrentPosition.X + e.X), this.Location.Y + (mCurrentPosition.Y + e.Y));
@@ -643,7 +587,7 @@ namespace goUP_Brain
                         golocal_bt_Click(sender, e);
                         this.Size = new Size(250, 80);
                         minimode_panel.Visible = true;
-                        round(sender, e);
+                        round();
                     }
                 }
             }
@@ -673,19 +617,6 @@ namespace goUP_Brain
             goupid f = new goupid("");
             f.ShowDialog();
             this.Show();
-        }
-
-        private void main_Shown(object sender, EventArgs e)
-        {
-            if (Properties.Settings.Default.autologin == true)
-            {
-                this.Hide();
-                goupid f = new goupid("auto_login");
-                f.ShowDialog();
-                this.Show();
-
-                //goupid_bt.Text = Properties.Settings.Default.id;
-            }
         }
 
         bool if_readmode = true;
@@ -968,7 +899,7 @@ namespace goUP_Brain
                                 File.WriteAllText(df + "암호화된 시냅스 " + count + ".goUP", onebone);
 
                                 //새로고침
-                                reload(sender, e);
+                                reload();
 
                                 //알림 뛰우기
                                 info_text = "⚠️ | 시냅스를 복호화할수 없어요";
@@ -1345,7 +1276,7 @@ namespace goUP_Brain
                         infobox(sender, e);
                     }
 
-                    reload(sender, e);
+                    reload();
 
                     //알림 뛰우기
                     info_text = "시냅스를 모두 복원했어요";
@@ -1374,7 +1305,7 @@ namespace goUP_Brain
             settings f = new settings();
             f.ShowDialog();
 
-            reload(sender, e);
+            reload();
 
             try
             {
@@ -1542,7 +1473,7 @@ namespace goUP_Brain
             mode_bt.Enabled = true;
 
             // 리로드
-            reload(sender, e);
+            reload();
 
             // 시냅스 선택
             if (listBox.Items.Count != 0)
