@@ -10,6 +10,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -2266,6 +2267,26 @@ namespace goUP_Brain
         private void main_FormClosing(object sender, FormClosingEventArgs e)
         {
             client.Dispose();
+        }
+
+        private void webBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+            //MessageBox.Show(e.Url.ToString());
+
+            // 주소가 파일인지 검사
+            if (!(e.Url.ToString().Equals("about:blank", StringComparison.OrdinalIgnoreCase) || new Uri(e.Url.ToString()).IsFile))
+            {
+                // 알림 뛰우기
+                info_text = "외부 브라우저에서 열었어요";
+                info_panel.BackColor = Color.DodgerBlue;
+                infobox(sender, e);
+
+                // 탐색 취소
+                e.Cancel = true;
+
+                // 외부 프로그램에서 열기
+                Process.Start(e.Url.ToString());
+            }
         }
     }
 }

@@ -287,6 +287,7 @@ namespace goUP_Brain
             this.webBrowser.TabIndex = 8;
             this.webBrowser.Visible = false;
             this.webBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser_DocumentCompleted);
+            this.webBrowser.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser_Navigating);
             // 
             // mode_bt
             // 
